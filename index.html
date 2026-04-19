@@ -35,12 +35,16 @@
         .bg-slideshow div {
             position: absolute; width: 100%; height: 100%;
             background-size: cover; background-position: center; opacity: 0;
-            animation: fadeSlide 20s infinite;
+            animation: fadeSlide 35s infinite;
         }
-        .bg-slideshow div:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80'); animation-delay: 0s; }
-        .bg-slideshow div:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80'); animation-delay: 5s; }
-        .bg-slideshow div:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80'); animation-delay: 10s; }
-        .bg-slideshow div:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=80'); animation-delay: 15s; }
+        .bg-slideshow div:nth-child(1) { background-image: url('assets/img/1.jpeg'); animation-delay: 0s; }
+        .bg-slideshow div:nth-child(2) { background-image: url('assets/img/2.jpeg'); animation-delay: 5s; }
+        .bg-slideshow div:nth-child(3) { background-image: url('assets/img/3.jpeg'); animation-delay: 10s; }
+        .bg-slideshow div:nth-child(4) { background-image: url('assets/img/4.jpeg'); animation-delay: 15s; }
+        .bg-slideshow div:nth-child(5) { background-image: url('assets/img/5.jpeg'); animation-delay: 20s; }
+        .bg-slideshow div:nth-child(6) { background-image: url('assets/img/6.jpeg'); animation-delay: 25s; }
+        .bg-slideshow div:nth-child(7) { background-image: url('assets/img/7.jpeg'); animation-delay: 30s; }
+        .bg-slideshow div:nth-child(8) { background-image: url('assets/img/cover.jpeg'); animation-delay: 35s; }
 
         @keyframes fadeSlide {
             0% { opacity: 0; transform: scale(1); }
@@ -101,12 +105,16 @@
 <body class="text-slate-800 no-scroll bg-transparent">
 
     <audio id="bg-music" loop>
-        <source src="D:\PROJECT\My Wedding\undangan online\music\OST.mpeg" type="audio/mpeg">
+        <source src="assets/audio/OST.mpeg" type="audio/mpeg">
     </audio>
 
     <div id="petal-container"></div>
 
     <div class="bg-slideshow">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
         <div></div>
         <div></div>
         <div></div>
@@ -165,8 +173,7 @@
         <section class="max-w-3xl mx-auto px-6 py-16 text-center reveal">
             <div class="glass-panel p-8 md:p-12 rounded-[2rem] relative">
                 <i class="fa-solid fa-quote-right absolute top-6 right-8 text-4xl text-sky-200 opacity-50"></i>
-                <p class="font-arabic text-2xl md:text-3xl leading-loose text-slate-800 mb-6 drop-shadow-sm" dir="rtl">
-                    وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم mِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم mَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
+                <p class="font-arabic text-2xl md:text-3xl leading-loose text-slate-800 mb-6 drop-shadow-sm" dir="rtl">وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
                 </p>
                 <p class="text-sm text-slate-700 italic leading-relaxed mb-4">
                     "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang..."
@@ -186,18 +193,49 @@
                 <div class="grid md:grid-cols-2 gap-10">
                     <div class="flex flex-col items-center group">
                         <div class="w-56 h-56 rounded-full overflow-hidden shadow-2xl mb-6 border-4 border-white group-hover:scale-105 transition-transform duration-500">
-                            <img src="D:\PROJECT\My Wedding\undangan online\photos\yog.JPG?auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover">
+                            <img src="assets/img/yog.JPG" class="w-full h-full object-cover">
                         </div>
                         <h2 class="font-aesthetic text-4xl font-bold mb-2 text-sky-800">Yoga Dimas Saputra. A.Md.T</h2>
                         <p class="text-sm text-slate-600 font-semibold">Putra dari Bapak Adi Saputra & Ibu Tatik Indayani</p>
                     </div>
                     <div class="flex flex-col items-center group">
                         <div class="w-56 h-56 rounded-full overflow-hidden shadow-2xl mb-6 border-4 border-white group-hover:scale-105 transition-transform duration-500">
-                            <img src="D:\PROJECT\My Wedding\undangan online\photos\naf.JPG?auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover">
+                            <img src="assets/img/naf.JPG" class="w-full h-full object-cover">
                         </div>
                         <h2 class="font-aesthetic text-4xl font-bold mb-2 text-sky-800">Nafisatul Munawwaroh, S.Kom</h2>
                         <p class="text-sm text-slate-600 font-semibold">Putri dari Bapak Bambang Suprijadi & Ibu Aliyah</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto px-4 mb-32 reveal">
+            <h2 class="font-aesthetic text-5xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mb-24 text-center">Intimate Words</h2>
+            
+            <div class="glass-panel p-8 md:p-12 rounded-[2rem] relative hover:-translate-y-2 transition-transform duration-500">
+                
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-2xl border-4 border-white absolute -top-16 md:-top-20 left-1/2 transform -translate-x-1/2 z-20 bg-white">
+                    <img src="assets/img/love.jpeg" class="w-full h-full object-cover">
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 mt-16 md:mt-20">
+                    
+                    <div class="flex flex-col items-center text-center relative px-2 md:border-r border-slate-300/50">
+                        <i class="fa-solid fa-quote-left absolute -top-6 left-0 md:left-4 text-4xl text-sky-200 opacity-50"></i>
+                        <p class="text-slate-800 italic leading-relaxed mb-6 font-medium relative z-10 drop-shadow-sm">
+                            "Menemukanmu adalah kebetulan yang paling aku syukuri. Memilihmu adalah keputusan yang tak akan pernah aku sesali. Mari menua bersama dan merangkai cerita hingga ke surga-Nya."
+                        </p>
+                        <h3 class="font-aesthetic text-3xl text-sky-800 font-bold drop-shadow-sm">Yoga</h3>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center relative px-2">
+                        <i class="fa-solid fa-quote-right absolute -top-6 right-0 md:right-4 text-4xl text-sky-200 opacity-50"></i>
+                        <p class="text-slate-800 italic leading-relaxed mb-6 font-medium relative z-10 drop-shadow-sm">
+                            "Dalam doaku, aku selalu meminta yang terbaik. Dan Allah mengabulkannya dengan mengirimkanmu. Bersamamu, aku menemukan rumah tempat hatiku bersandar dengan tenang."
+                        </p>
+                        <h3 class="font-aesthetic text-3xl text-sky-800 font-bold drop-shadow-sm">Nafisa</h3>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -233,42 +271,51 @@
             <p class="text-white/90 mb-10 text-sm font-medium drop-shadow-md">Momen kebersamaan yang kami abadikan.</p>
             
             <div class="glass-panel p-4 md:p-6 rounded-[2rem]">
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="col-span-2 md:col-span-3 h-64 md:h-96 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                            <source src="https://assets.mixkit.co/videos/preview/mixkit-wedding-couple-kissing-under-a-veil-43486-large.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-                    <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-                    <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white col-span-2 md:col-span-1"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-                </div>
-            </div>
-        </section>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        
+        <div class="col-span-2 md:col-span-3 h-64 md:h-96 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/e.jpeg" alt="Galeri 1" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/b.jpeg" alt="Galeri 2" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/c.jpeg" alt="Galeri 3" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/d.jpeg" alt="Galeri 4" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/a.jpeg" alt="Galeri 5" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/f.jpeg" alt="Galeri 6" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/g.jpeg" alt="Galeri 7" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/h.jpeg" alt="Galeri 8" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/i.jpeg" alt="Galeri 9" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/j.jpeg" alt="Galeri 10" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/k.jpeg" alt="Galeri 11" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/l.jpeg" alt="Galeri 12" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
+        <div class="h-48 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+            <img src="assets/img/m.jpeg" alt="Galeri 13" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        </div>
 
-        <section class="max-w-3xl mx-auto px-4 mb-24 reveal">
-            <div class="glass-panel p-8 md:p-12 rounded-[2rem] text-center">
-                <i class="fa-solid fa-gift text-5xl text-sky-600 mb-6 drop-shadow-md"></i>
-                <h2 class="font-aesthetic text-5xl text-slate-800 mb-4">Wedding Gift</h2>
-                <p class="text-slate-700 text-sm mb-8 px-4 font-medium leading-relaxed">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun, jika Anda ingin memberikan tanda kasih, kami menyediakan fitur di bawah ini.</p>
-                
-                <div class="bg-white/70 p-6 rounded-2xl border border-white shadow-inner mx-auto max-w-sm mb-4">
-                    <img src="D:\PROJECT\My Wedding\bca.png" alt="BCA" class="h-8 mx-auto mb-4">
-                    <p class="text-2xl font-bold text-slate-800 tracking-widest mb-1" id="rek-bca">0190878902</p>
-                    <p class="text-sm text-slate-600 font-semibold mb-6">a.n. Yoga Dimas Saputra</p>
-                    <button onclick="salinRekening('rek-bca')" class="bg-sky-100 hover:bg-sky-200 text-sky-800 px-4 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2 w-full font-bold shadow-sm">
-                        <i class="fa-regular fa-copy"></i> Salin Rekening
-                    </button>
-                </div>
-                <div class="bg-white/70 p-6 rounded-2xl border border-white shadow-inner mx-auto max-w-sm mb-4">
-                    <img src="D:\PROJECT\My Wedding\bni.png" alt="BNI" class="h-8 mx-auto mb-4">
-                    <p class="text-2xl font-bold text-slate-800 tracking-widest mb-1" id="rek-bni">1527763058</p>
-                    <p class="text-sm text-slate-600 font-semibold mb-6">a.n. Nafisatul Munawwaroh</p>
-                    <button onclick="salinRekening('rek-bni')" class="bg-sky-100 hover:bg-sky-200 text-sky-800 px-4 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2 w-full font-bold shadow-sm">
-                        <i class="fa-regular fa-copy"></i> Salin Rekening
-                    </button>
-                </div>
-            </div>
+    </div>
+</div>
         </section>
 
         <section class="max-w-5xl mx-auto px-4 mb-16 grid md:grid-cols-2 gap-8 reveal">
@@ -304,6 +351,31 @@
                     <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-300 pb-2">Pesan Masuk (<span id="wish-count">0</span>)</h3>
                     <div id="wishes-container" class="wishes-container h-64 overflow-y-auto pr-2 space-y-4">
                         </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-3xl mx-auto px-4 mb-24 reveal">
+            <div class="glass-panel p-8 md:p-12 rounded-[2rem] text-center">
+                <i class="fa-solid fa-gift text-5xl text-sky-600 mb-6 drop-shadow-md"></i>
+                <h2 class="font-aesthetic text-5xl text-slate-800 mb-4">Wedding Gift</h2>
+                <p class="text-slate-700 text-sm mb-8 px-4 font-medium leading-relaxed">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun, jika Anda ingin memberikan tanda kasih, kami menyediakan fitur di bawah ini.</p>
+                
+                <div class="bg-white/70 p-6 rounded-2xl border border-white shadow-inner mx-auto max-w-sm mb-4">
+                    <img src="assets/img/bca.png" alt="BCA" class="h-8 mx-auto mb-4">
+                    <p class="text-2xl font-bold text-slate-800 tracking-widest mb-1" id="rek-bca">0190878902</p>
+                    <p class="text-sm text-slate-600 font-semibold mb-6">a.n. Yoga Dimas Saputra</p>
+                    <button onclick="salinRekening('rek-bca')" class="bg-sky-100 hover:bg-sky-200 text-sky-800 px-4 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2 w-full font-bold shadow-sm">
+                        <i class="fa-regular fa-copy"></i> Salin Rekening
+                    </button>
+                </div>
+                <div class="bg-white/70 p-6 rounded-2xl border border-white shadow-inner mx-auto max-w-sm mb-4">
+                    <img src="assets/img/bni.png" alt="BNI" class="h-8 mx-auto mb-4">
+                    <p class="text-2xl font-bold text-slate-800 tracking-widest mb-1" id="rek-bni">1527763058</p>
+                    <p class="text-sm text-slate-600 font-semibold mb-6">a.n. Nafisatul Munawwaroh</p>
+                    <button onclick="salinRekening('rek-bni')" class="bg-sky-100 hover:bg-sky-200 text-sky-800 px-4 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2 w-full font-bold shadow-sm">
+                        <i class="fa-regular fa-copy"></i> Salin Rekening
+                    </button>
                 </div>
             </div>
         </section>
