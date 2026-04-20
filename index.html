@@ -122,30 +122,31 @@
 
     <main id="main-content" class="min-h-screen pb-10">
         
-        <section class="relative w-full min-h-screen flex flex-col items-center justify-center pt-16 pb-16 reveal">
-            <div class="absolute inset-0 z-0 flex items-center justify-center overflow-hidden rounded-b-[30px] md:rounded-b-[40px] shadow-2xl mx-3 md:mx-4 mt-3 md:mt-4 h-[75vh] md:h-[80vh] border border-white/20 bg-slate-900">
-                 <img src="assets/img/cover.jpeg" class="w-full h-full object-cover object-top opacity-60" alt="Background Cover" loading="lazy">
-                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/50 to-transparent"></div>
+        <section class="relative w-full min-h-screen flex flex-col items-center justify-center pt-12 pb-16 reveal">
+            <div class="absolute inset-0 z-0 flex items-center justify-center overflow-hidden rounded-b-[30px] md:rounded-b-[40px] shadow-2xl mx-3 md:mx-4 mt-3 md:mt-4 h-[55vh] md:h-[80vh] border border-white/20 bg-slate-900">
+                 <img src="assets/img/cover.jpeg" class="w-full h-full object-contain md:object-cover object-center opacity-70" alt="Background Cover" loading="lazy">
+                 
+                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-transparent"></div>
             </div>
             
-            <div class="relative z-10 text-center text-white px-4 mt-auto mb-6 md:mb-10 w-full">
-                <p class="tracking-widest text-[10px] md:text-sm mb-1 uppercase text-sky-300">Menuju Hari Bahagia</p>
-                <h2 class="font-aesthetic text-4xl md:text-8xl drop-shadow-lg mb-6 md:mb-10">Yoga & Nafisa</h2>
+            <div class="relative z-10 text-center text-white px-4 mt-auto mb-4 md:mb-10 w-full">
+                <p class="tracking-widest text-xs md:text-sm mb-2 uppercase text-sky-300">Menuju Hari Bahagia</p>
+                <h2 class="font-aesthetic text-4xl sm:text-5xl md:text-8xl drop-shadow-lg mb-6 md:mb-10">Yoga & Nafisa</h2>
                 
                 <div class="flex justify-center gap-2 sm:gap-3 md:gap-5 mt-4 flex-wrap">
-                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-16 md:w-24 shadow-lg">
+                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg">
                         <span id="hari" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
                         <span class="text-[9px] md:text-sm font-semibold">Hari</span>
                     </div>
-                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-16 md:w-24 shadow-lg">
+                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg">
                         <span id="jam" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
                         <span class="text-[9px] md:text-sm font-semibold">Jam</span>
                     </div>
-                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-16 md:w-24 shadow-lg">
+                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg">
                         <span id="menit" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
                         <span class="text-[9px] md:text-sm font-semibold">Menit</span>
                     </div>
-                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-16 md:w-24 shadow-lg">
+                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg">
                         <span id="detik" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
                         <span class="text-[9px] md:text-sm font-semibold">Detik</span>
                     </div>
@@ -191,6 +192,31 @@
             </div>
         </section>
 
+        <section class="max-w-5xl mx-auto px-4 mb-16 md:mb-24 reveal">
+            <h2 class="font-aesthetic text-3xl md:text-5xl text-white drop-shadow-md mb-6 md:mb-10 text-center">Waktu & Tempat</h2>
+            <div class="grid md:grid-cols-2 gap-5 md:gap-8">
+                <div class="glass-panel p-5 md:p-8 rounded-3xl text-center flex flex-col h-full">
+                    <div class="w-14 h-14 md:w-20 md:h-20 mx-auto bg-white/70 rounded-full flex items-center justify-center mb-3 md:mb-6 shadow-inner border border-white">
+                        <i class="fa-solid fa-handshake text-xl md:text-3xl text-sky-600"></i>
+                    </div>
+                    <h3 class="text-xl md:text-3xl font-aesthetic font-bold mb-1 md:mb-3 text-slate-800">Akad Nikah</h3>
+                    <p class="font-bold text-sky-700 text-sm md:text-lg">Selasa, 26 Mei 2026</p>
+                    <p class="text-slate-700 font-medium mb-2 md:mb-4 text-xs md:text-base">09.00 WIB - Selesai</p>
+                    <p class="text-[11px] md:text-sm text-slate-600 font-medium flex-grow px-1">Musholah Bustanul Ulum <br> Jl. Imam Bonjol Gg.1, Sisir, Kota Batu</p>
+                </div>
+                <div class="glass-panel p-5 md:p-8 rounded-3xl text-center flex flex-col h-full">
+                    <div class="w-14 h-14 md:w-20 md:h-20 mx-auto bg-white/70 rounded-full flex items-center justify-center mb-3 md:mb-6 shadow-inner border border-white">
+                        <i class="fa-solid fa-gem text-xl md:text-3xl text-sky-600"></i>
+                    </div>
+                    <h3 class="text-xl md:text-3xl font-aesthetic font-bold mb-1 md:mb-3 text-slate-800">Resepsi</h3>
+                    <p class="font-bold text-sky-700 text-sm md:text-lg">Minggu, 31 Mei 2026</p>
+                    <p class="text-slate-700 font-medium mb-2 md:mb-4 text-xs md:text-base">10.00 WIB - Selesai</p>
+                    <p class="text-[11px] md:text-sm text-slate-600 mb-4 md:mb-8 font-medium flex-grow px-1">Rumah Mempelai Pria <br> Jl. Aji Mustofa No.4, Torongrejo, Junrejo, Kota Batu</p>
+                    <a href="https://maps.app.goo.gl/Q1zKZwU3TamPqx5W8" target="_blank" rel="noopener noreferrer" class="inline-block bg-sky-600/90 text-white px-5 md:px-8 py-2 md:py-3 rounded-full text-xs md:text-sm hover:bg-sky-500 transition shadow-md font-semibold w-full md:w-auto mx-auto mt-auto">Lihat Peta Lokasi</a>
+                </div>
+            </div>
+        </section>
+
         <section class="max-w-4xl mx-auto px-4 mb-20 md:mb-32 reveal">
             <h2 class="font-aesthetic text-3xl md:text-5xl text-white drop-shadow-md mb-12 md:mb-20 text-center">Intimate Words</h2>
             
@@ -203,7 +229,8 @@
                     <div class="flex flex-col items-center text-center relative px-2 md:border-r border-slate-300/50 pb-5 md:pb-0 border-b md:border-b-0">
                         <i class="fa-solid fa-quote-left absolute -top-2 md:-top-6 left-0 text-2xl md:text-4xl text-sky-200 opacity-40"></i>
                         <p class="text-slate-800 italic leading-relaxed mb-3 md:mb-6 font-medium relative z-10 text-[11px] md:text-base">
-                            "Menemukanmu adalah kebetulan yang paling aku syukuri. Memilihmu adalah keputusan yang tak akan pernah aku sesali. Mari menua bersama dan merangkai cerita hingga ke surga-Nya."
+                            "A beautiful chapter begins not just when our eyes met, but when our souls decided to walk toward Allah, hand in hand.
+                            I'm grateful for every moment that led us here, and I can't wait to see what Allah has in store for us in this journey of love and faith."
                         </p>
                         <h3 class="font-aesthetic text-xl md:text-3xl text-sky-800 font-bold">Yoga</h3>
                     </div>
@@ -211,35 +238,11 @@
                     <div class="flex flex-col items-center text-center relative px-2 mt-2 md:mt-0">
                         <i class="fa-solid fa-quote-right absolute -top-2 md:-top-6 right-0 text-2xl md:text-4xl text-sky-200 opacity-40"></i>
                         <p class="text-slate-800 italic leading-relaxed mb-3 md:mb-6 font-medium relative z-10 text-[11px] md:text-base">
-                            "Dalam doaku, aku selalu meminta yang terbaik. Dan Allah mengabulkannya dengan mengirimkanmu. Bersamamu, aku menemukan rumah tempat hatiku bersandar dengan tenang."
+                            "Aku selalu percaya bahwa do'a-do'a yang selalu kubisikkan dalam setiap sujud sholat-ku akan datang tepat di waktu yang paling indah. 
+                            And out of all my prayers, you're the most beautiful answer Allah bestowed upon me."
                         </p>
                         <h3 class="font-aesthetic text-xl md:text-3xl text-sky-800 font-bold">Nafisa</h3>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="max-w-5xl mx-auto px-4 mb-16 md:mb-24 reveal">
-            <h2 class="font-aesthetic text-3xl md:text-5xl text-white drop-shadow-md mb-6 md:mb-10 text-center">Waktu & Tempat</h2>
-            <div class="grid md:grid-cols-2 gap-5 md:gap-8">
-                <div class="glass-panel p-5 md:p-8 rounded-3xl text-center flex flex-col h-full">
-                    <div class="w-14 h-14 md:w-20 md:h-20 mx-auto bg-white/70 rounded-full flex items-center justify-center mb-3 md:mb-6 shadow-inner border border-white">
-                        <i class="fa-solid fa-handshake text-xl md:text-3xl text-sky-600"></i>
-                    </div>
-                    <h3 class="text-xl md:text-3xl font-aesthetic font-bold mb-1 md:mb-3 text-slate-800">Akad Nikah</h3>
-                    <p class="font-bold text-sky-700 text-sm md:text-lg">Selasa, 26 Mei 2026</p>
-                    <p class="text-slate-700 font-medium mb-2 md:mb-4 text-xs md:text-base">09.00 WIB - Selesai</p>
-                    <p class="text-[11px] md:text-sm text-slate-600 font-medium flex-grow px-1">Musholah Bustanul Ulum <br> Jl. Imam Bonjol Gg.1, Kota Batu</p>
-                </div>
-                <div class="glass-panel p-5 md:p-8 rounded-3xl text-center flex flex-col h-full">
-                    <div class="w-14 h-14 md:w-20 md:h-20 mx-auto bg-white/70 rounded-full flex items-center justify-center mb-3 md:mb-6 shadow-inner border border-white">
-                        <i class="fa-solid fa-gem text-xl md:text-3xl text-sky-600"></i>
-                    </div>
-                    <h3 class="text-xl md:text-3xl font-aesthetic font-bold mb-1 md:mb-3 text-slate-800">Resepsi</h3>
-                    <p class="font-bold text-sky-700 text-sm md:text-lg">Minggu, 31 Mei 2026</p>
-                    <p class="text-slate-700 font-medium mb-2 md:mb-4 text-xs md:text-base">10.00 WIB - Selesai</p>
-                    <p class="text-[11px] md:text-sm text-slate-600 mb-4 md:mb-8 font-medium flex-grow px-1">Rumah Mempelai Pria <br> Jl. Aji Mustofa No.4, Torongrejo, Junrejo, Kota Batu</p>
-                    <a href="https://maps.app.goo.gl/Q1zKZwU3TamPqx5W8" target="_blank" rel="noopener noreferrer" class="inline-block bg-sky-600/90 text-white px-5 md:px-8 py-2 md:py-3 rounded-full text-xs md:text-sm hover:bg-sky-500 transition shadow-md font-semibold w-full md:w-auto mx-auto mt-auto">Lihat Peta Lokasi</a>
                 </div>
             </div>
         </section>
@@ -453,18 +456,59 @@
             wishesData.forEach(wish => {
                 wishesContainer.innerHTML += `
                 <div class="bg-white/80 p-3 md:p-4 rounded-xl border border-slate-100 shadow-sm">
-                    <h4 class="font-bold text-xs md:text-sm text-sky-800">${wish.nama}</h4>
-                    <p class="text-[10px] md:text-xs text-slate-700 mt-1 font-medium leading-relaxed">${wish.pesan}</p>
+                    <h4 class="font-bold text-[13px] md:text-sm text-sky-800">${wish.nama}</h4>
+                    <p class="text-[11px] md:text-xs text-slate-700 mt-1 font-medium leading-relaxed">${wish.pesan}</p>
                 </div>`;
             });
             document.getElementById('wish-count').innerText = wishesData.length;
         }
         renderWishes();
         
+        // --- KODE BARU UNTUK KIRIM KE EMAIL (FORMSPREE) ---
         document.getElementById('wishes-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            wishesData.unshift({ nama: document.getElementById('wish-name').value, pesan: document.getElementById('wish-message').value });
-            renderWishes(); document.getElementById('wish-message').value = '';
+            
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            const namaTamu = document.getElementById('wish-name').value;
+            const pesanTamu = document.getElementById('wish-message').value;
+
+            // Ganti teks tombol saat loading
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim...';
+            btn.disabled = true;
+
+            // GANTI LINK DI BAWAH INI DENGAN LINK FORMSPREE ANDA
+            const formspreeLink = 'https://formspree.io/f/mlganvbj'; 
+
+            fetch(formspreeLink, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Nama: namaTamu,
+                    Ucapan: pesanTamu
+                })
+            }).then(response => {
+                if (response.ok) {
+                    // Jika sukses kirim ke email, munculkan juga di layar web
+                    wishesData.unshift({ nama: namaTamu, pesan: pesanTamu });
+                    renderWishes(); 
+                    
+                    // Kosongkan form
+                    document.getElementById('wish-name').value = '';
+                    document.getElementById('wish-message').value = '';
+                } else {
+                    alert('Ups, terjadi kesalahan saat mengirim ucapan ke server.');
+                }
+            }).catch(error => {
+                alert('Gagal mengirim ucapan, periksa koneksi internet Anda.');
+            }).finally(() => {
+                // Kembalikan tombol ke keadaan semula
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
         });
 
         // 7. Scroll Reveal Animation
