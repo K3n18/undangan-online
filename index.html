@@ -2,45 +2,43 @@
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Undangan Pernikahan - Yoga & Nafisa</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600&family=Amiri&display=swap" rel="stylesheet">
     
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #0f172a; }
+        body { font-family: 'Poppins', sans-serif; background-color: #0f172a; overflow-x: hidden; }
         .font-aesthetic { font-family: 'Dancing Script', cursive; }
         .font-arabic { font-family: 'Amiri', serif; }
         
-        /* Animasi Buka Undangan */
-        #cover-page { 
-            transition: transform 1.2s cubic-bezier(0.86, 0, 0.07, 1), opacity 1.2s ease-out; 
+        cover-page { 
+            transition: transform 1s cubic-bezier(0.86, 0, 0.07, 1), opacity 1s ease-out; 
             transform-origin: center top;
+            will-change: transform, opacity;
         }
-        .hide-cover { transform: translateY(-100%) scale(1.05); opacity: 0; pointer-events: none; }
+        .hide-cover { transform: translateY(-100%); opacity: 0; pointer-events: none; }
         .no-scroll { overflow: hidden; }
 
-        /* Latar Belakang Foto Slideshow (Dioptimasi untuk 8 Foto) */
         .bg-slideshow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -10;
         }
         .bg-slideshow::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.8));
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.85));
         }
         .bg-slideshow div {
             position: absolute; width: 100%; height: 100%;
-            background-size: cover; background-position: center; opacity: 0;
+            background-size: cover; background-position: center top; opacity: 0;
             animation: fadeSlide 40s infinite;
+            will-change: opacity, transform;
         }
         
-        /* Urutan 8 Foto Masing-masing durasi 5 detik (Total 40s) */
         .bg-slideshow div:nth-child(1) { background-image: url('assets/img/1.jpeg'); animation-delay: 0s; }
         .bg-slideshow div:nth-child(2) { background-image: url('assets/img/2.jpeg'); animation-delay: 5s; }
         .bg-slideshow div:nth-child(3) { background-image: url('assets/img/3.jpeg'); animation-delay: 10s; }
@@ -50,34 +48,29 @@
         .bg-slideshow div:nth-child(7) { background-image: url('assets/img/7.jpeg'); animation-delay: 30s; }
         .bg-slideshow div:nth-child(8) { background-image: url('assets/img/cover.jpeg'); animation-delay: 35s; }
 
-        /* Rumus Presisi 8 Foto agar GPU HP tidak berat */
         @keyframes fadeSlide {
             0%   { opacity: 0; transform: scale(1); }
             5%   { opacity: 1; }
             12.5%{ opacity: 1; }
-            17.5%{ opacity: 0; transform: scale(1.05); }
+            17.5%{ opacity: 0; transform: scale(1.03); } 
             100% { opacity: 0; }
         }
 
-        /* Glassmorphism Panel Elegan */
         .glass-panel {
             background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
         }
 
-        /* Scroll Reveal Animation */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease-out; will-change: opacity, transform; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Scrollbar Halus */
-        .wishes-container::-webkit-scrollbar { width: 6px; }
-        .wishes-container::-webkit-scrollbar-track { background: rgba(255,255,255,0.5); border-radius: 10px; }
-        .wishes-container::-webkit-scrollbar-thumb { background: #0ea5e9; border-radius: 10px; }
+        .wishes-container::-webkit-scrollbar { width: 4px; }
+        .wishes-container::-webkit-scrollbar-track { background: rgba(255,255,255,0.3); border-radius: 10px; }
+        .wishes-container::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 10px; }
 
-        /* Kelopak Bunga (Petals) */
         #petal-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: -5; overflow: hidden;
@@ -85,8 +78,9 @@
         .petal {
             position: absolute; display: block;
             background-color: #ffb6c1; border-radius: 150% 0 150% 0;
-            opacity: 0.7; pointer-events: none;
+            opacity: 0.6; pointer-events: none;
             animation: fall linear infinite;
+            will-change: transform;
         }
         .petal:nth-child(2n) { background-color: #fff0f5; }
         .petal:nth-child(3n) { background-color: #ffe4e1; border-radius: 50% 0 50% 0; }
@@ -94,7 +88,7 @@
         @keyframes fall {
             0% { transform: translate(0, -10px) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
-            100% { transform: translate(80px, 110vh) rotate(360deg); opacity: 0; }
+            100% { transform: translate(50px, 110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
@@ -110,234 +104,231 @@
         <div></div><div></div><div></div><div></div>
     </div>
 
-    <section id="cover-page" class="fixed inset-0 z-50 flex flex-col justify-center items-center text-center p-6 bg-slate-900/60 backdrop-blur-sm">
-        <p class="text-sm tracking-widest mb-3 uppercase text-sky-200 animate-pulse">The Wedding Of</p>
-        <h1 class="font-aesthetic text-6xl md:text-8xl mb-8 text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">Yoga & Nafisa</h1>
+    <section id="cover-page" class="fixed inset-0 z-50 flex flex-col justify-center items-center text-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <p class="text-[10px] md:text-sm tracking-widest mb-2 uppercase text-sky-200 animate-pulse">The Wedding Of</p>
+        <h1 class="font-aesthetic text-4xl sm:text-5xl md:text-8xl mb-6 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] px-2">Yoga & Nafisa</h1>
         
-        <div class="mt-6 mb-10 z-10">
-            <p class="text-sm mb-2 text-sky-100 font-light">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
-            <h2 id="guest-name" class="text-2xl md:text-3xl font-bold bg-white/20 px-8 py-3 rounded-xl backdrop-blur-md shadow-2xl border border-white/30 text-white">Nama Tamu</h2>
+        <div class="mt-4 mb-6 z-10 w-full max-w-xs">
+            <p class="text-[10px] md:text-sm mb-2 text-sky-100 font-light">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+            <h2 id="guest-name" class="text-lg md:text-3xl font-bold bg-white/20 px-4 py-2 md:px-8 md:py-3 rounded-xl backdrop-blur-md shadow-lg border border-white/30 text-white break-words">Tamu Undangan</h2>
         </div>
 
-        <button onclick="bukaUndangan()" class="mt-2 bg-sky-600/90 hover:bg-sky-500 text-white px-8 py-3.5 rounded-full font-semibold transition-all shadow-[0_0_20px_rgba(14,165,233,0.5)] hover:scale-105 flex items-center gap-3 border border-sky-400">
-            <i class="fa-solid fa-envelope-open text-lg"></i> Buka Undangan
+        <button onclick="bukaUndangan()" class="mt-2 bg-sky-600/90 hover:bg-sky-500 text-white px-5 py-2.5 md:px-8 md:py-3.5 rounded-full font-semibold transition-all shadow-lg hover:scale-105 flex items-center gap-2 border border-sky-400 text-xs md:text-base">
+            <i class="fa-solid fa-envelope-open"></i> Buka Undangan
         </button>
     </section>
 
     <main id="main-content" class="min-h-screen pb-10">
         
-        <section class="relative w-full min-h-screen flex flex-col items-center justify-center pt-20 pb-20 reveal">
-            <div class="absolute inset-0 z-0 flex items-center justify-center overflow-hidden rounded-b-[40px] shadow-2xl mx-4 mt-4 h-[80vh] border border-white/20 bg-slate-900">
-                 <img src="assets/img/cover.jpeg" class="w-full h-full object-cover opacity-60" alt="Background Cover">
-                 
-                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
+        <section class="relative w-full min-h-screen flex flex-col items-center justify-center pt-16 pb-16 reveal">
+            <div class="absolute inset-0 z-0 flex items-center justify-center overflow-hidden rounded-b-[30px] md:rounded-b-[40px] shadow-2xl mx-3 md:mx-4 mt-3 md:mt-4 h-[75vh] md:h-[80vh] border border-white/20 bg-slate-900">
+                 <img src="assets/img/cover.jpeg" class="w-full h-full object-cover object-top opacity-60" alt="Background Cover" loading="lazy">
+                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/50 to-transparent"></div>
             </div>
             
-            <div class="relative z-10 text-center text-white px-4 mt-auto mb-10">
-                <p class="tracking-widest text-sm md:text-base mb-2 uppercase text-sky-300">Menuju Hari Bahagia</p>
-                <h2 class="font-aesthetic text-6xl md:text-8xl drop-shadow-lg mb-10">Yoga & Nafisa</h2>
+            <div class="relative z-10 text-center text-white px-4 mt-auto mb-6 md:mb-10 w-full">
+                <p class="tracking-widest text-[10px] md:text-sm mb-1 uppercase text-sky-300">Menuju Hari Bahagia</p>
+                <h2 class="font-aesthetic text-4xl md:text-8xl drop-shadow-lg mb-6 md:mb-10">Yoga & Nafisa</h2>
                 
-                <div class="flex justify-center gap-3 md:gap-5 mt-8">
-                    <div class="glass-panel text-slate-800 rounded-2xl p-3 md:p-4 w-16 md:w-24 shadow-xl">
-                        <span id="hari" class="block text-2xl md:text-4xl font-bold text-sky-700">00</span>
-                        <span class="text-xs md:text-sm font-semibold">Hari</span>
+                <div class="flex justify-center gap-2 sm:gap-3 md:gap-5 mt-4 flex-wrap">
+                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-16 md:w-24 shadow-lg">
+                        <span id="hari" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
+                        <span class="text-[9px] md:text-sm font-semibold">Hari</span>
                     </div>
-                    <div class="glass-panel text-slate-800 rounded-2xl p-3 md:p-4 w-16 md:w-24 shadow-xl">
-                        <span id="jam" class="block text-2xl md:text-4xl font-bold text-sky-700">00</span>
-                        <span class="text-xs md:text-sm font-semibold">Jam</span>
+                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-16 md:w-24 shadow-lg">
+                        <span id="jam" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
+                        <span class="text-[9px] md:text-sm font-semibold">Jam</span>
                     </div>
-                    <div class="glass-panel text-slate-800 rounded-2xl p-3 md:p-4 w-16 md:w-24 shadow-xl">
-                        <span id="menit" class="block text-2xl md:text-4xl font-bold text-sky-700">00</span>
-                        <span class="text-xs md:text-sm font-semibold">Menit</span>
+                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-16 md:w-24 shadow-lg">
+                        <span id="menit" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
+                        <span class="text-[9px] md:text-sm font-semibold">Menit</span>
                     </div>
-                    <div class="glass-panel text-slate-800 rounded-2xl p-3 md:p-4 w-16 md:w-24 shadow-xl">
-                        <span id="detik" class="block text-2xl md:text-4xl font-bold text-sky-700">00</span>
-                        <span class="text-xs md:text-sm font-semibold">Detik</span>
+                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-16 md:w-24 shadow-lg">
+                        <span id="detik" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
+                        <span class="text-[9px] md:text-sm font-semibold">Detik</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="max-w-3xl mx-auto px-6 py-16 text-center reveal">
-            <div class="glass-panel p-8 md:p-12 rounded-[2rem] relative">
-                <i class="fa-solid fa-quote-right absolute top-6 right-8 text-4xl text-sky-200 opacity-50"></i>
-                <p class="font-arabic text-2xl md:text-3xl leading-loose text-slate-800 mb-6 drop-shadow-sm" dir="rtl">وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ</p>
-                <p class="text-sm text-slate-700 italic leading-relaxed mb-4">
+        <section class="max-w-3xl mx-auto px-4 md:px-6 py-10 md:py-16 text-center reveal">
+            <div class="glass-panel p-5 md:p-12 rounded-3xl md:rounded-[2rem] relative">
+                <i class="fa-solid fa-quote-right absolute top-4 right-5 md:top-6 md:right-8 text-2xl md:text-4xl text-sky-200 opacity-50"></i>
+                <p class="font-arabic text-lg md:text-3xl leading-relaxed md:leading-loose text-slate-800 mb-3 md:mb-6 drop-shadow-sm" dir="rtl">وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ</p>
+                <p class="text-[10px] md:text-sm text-slate-700 italic leading-relaxed mb-3 md:mb-4">
                     "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang..."
                 </p>
-                <p class="font-bold text-sky-700">(QS. Ar-Rum: 21)</p>
+                <p class="font-bold text-sky-700 text-[11px] md:text-base">(QS. Ar-Rum: 21)</p>
             </div>
         </section>
 
-        <section class="max-w-4xl mx-auto px-4 text-center mb-24 reveal">
-            <div class="glass-panel p-8 md:p-12 rounded-[2rem]">
-                <h3 class="font-aesthetic text-4xl text-sky-700 mb-4">Assalamualaikum Wr. Wb.</h3>
-                <p class="text-slate-700 mb-12 text-sm md:text-base leading-relaxed px-2 font-medium">
+        <section class="max-w-4xl mx-auto px-4 text-center mb-16 md:mb-24 reveal">
+            <div class="glass-panel p-6 md:p-12 rounded-3xl md:rounded-[2rem]">
+                <h3 class="font-aesthetic text-2xl md:text-4xl text-sky-700 mb-3 md:mb-4">Assalamualaikum Wr. Wb.</h3>
+                <p class="text-slate-700 mb-8 md:mb-12 text-[11px] md:text-base leading-relaxed font-medium">
                     Maha Suci Allah SWT yang telah menautkan dua hati dalam ikatan suci pernikahan. Dengan memohon Rahmat dan Ridha-Nya,
                     kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada acara pernikahan kami:
                 </p>
 
-                <div class="grid md:grid-cols-2 gap-12 md:gap-10">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-10">
                     <div class="flex flex-col items-center group">
-                        <div class="w-56 h-56 rounded-full overflow-hidden shadow-xl mb-6 border-4 border-white group-hover:scale-105 transition-transform duration-500">
-                            <img src="assets/img/yog.JPG" loading="lazy" class="w-full h-full object-cover">
+                        <div class="w-36 h-36 md:w-56 md:h-56 rounded-full overflow-hidden shadow-xl mb-3 md:mb-6 border-4 border-white">
+                            <img src="assets/img/yog.JPG" loading="lazy" class="w-full h-full object-cover object-top">
                         </div>
-                        <h2 class="font-aesthetic text-4xl font-bold mb-2 text-sky-800">Yoga Dimas Saputra, A.Md.T</h2>
-                        <p class="text-sm text-slate-600 font-semibold">Putra dari Bapak Adi Saputra & Ibu Tatik Indayani</p>
+                        <h2 class="font-aesthetic text-2xl md:text-4xl font-bold mb-1 md:mb-2 text-sky-800">Yoga Dimas Saputra, A.Md.T</h2>
+                        <p class="text-[10px] md:text-sm text-slate-600 font-semibold px-2">Putra dari Bapak Adi Saputra & Ibu Tatik Indayani</p>
                     </div>
                     <div class="flex flex-col items-center group">
-                        <div class="w-56 h-56 rounded-full overflow-hidden shadow-xl mb-6 border-4 border-white group-hover:scale-105 transition-transform duration-500">
-                            <img src="assets/img/naf.JPG" loading="lazy" class="w-full h-full object-cover">
+                        <div class="w-36 h-36 md:w-56 md:h-56 rounded-full overflow-hidden shadow-xl mb-3 md:mb-6 border-4 border-white">
+                            <img src="assets/img/naf.JPG" loading="lazy" class="w-full h-full object-cover object-top">
                         </div>
-                        <h2 class="font-aesthetic text-4xl font-bold mb-2 text-sky-800">Nafisatul Munawwaroh, S.Kom</h2>
-                        <p class="text-sm text-slate-600 font-semibold">Putri dari Bapak Bambang Suprijadi & Ibu Aliyah</p>
+                        <h2 class="font-aesthetic text-2xl md:text-4xl font-bold mb-1 md:mb-2 text-sky-800">Nafisatul Munawwaroh, S.Kom</h2>
+                        <p class="text-[10px] md:text-sm text-slate-600 font-semibold px-2">Putri dari Bapak Bambang Suprijadi & Ibu Aliyah</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="max-w-4xl mx-auto px-4 mb-32 reveal">
-            <h2 class="font-aesthetic text-5xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mb-20 text-center">Intimate Words</h2>
+        <section class="max-w-4xl mx-auto px-4 mb-20 md:mb-32 reveal">
+            <h2 class="font-aesthetic text-3xl md:text-5xl text-white drop-shadow-md mb-12 md:mb-20 text-center">Intimate Words</h2>
             
-            <div class="glass-panel p-8 md:p-12 rounded-[2rem] relative hover:-translate-y-2 transition-transform duration-500">
-                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-2xl border-4 border-white absolute -top-16 md:-top-20 left-1/2 transform -translate-x-1/2 z-20 bg-white">
+            <div class="glass-panel p-6 md:p-12 rounded-3xl md:rounded-[2rem] relative">
+                <div class="w-20 h-20 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-white absolute -top-10 md:-top-16 left-1/2 transform -translate-x-1/2 z-20 bg-white">
                     <img src="assets/img/love.jpeg" loading="lazy" class="w-full h-full object-cover">
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-10 md:gap-12 mt-16 md:mt-20">
-                    <div class="flex flex-col items-center text-center relative px-2 md:border-r border-slate-300/50">
-                        <i class="fa-solid fa-quote-left absolute -top-4 md:-top-6 left-0 md:left-4 text-4xl text-sky-200 opacity-50"></i>
-                        <p class="text-slate-800 italic leading-relaxed mb-6 font-medium relative z-10 drop-shadow-sm text-sm md:text-base">
+                <div class="grid md:grid-cols-2 gap-6 md:gap-12 mt-10 md:mt-20">
+                    <div class="flex flex-col items-center text-center relative px-2 md:border-r border-slate-300/50 pb-5 md:pb-0 border-b md:border-b-0">
+                        <i class="fa-solid fa-quote-left absolute -top-2 md:-top-6 left-0 text-2xl md:text-4xl text-sky-200 opacity-40"></i>
+                        <p class="text-slate-800 italic leading-relaxed mb-3 md:mb-6 font-medium relative z-10 text-[11px] md:text-base">
                             "Menemukanmu adalah kebetulan yang paling aku syukuri. Memilihmu adalah keputusan yang tak akan pernah aku sesali. Mari menua bersama dan merangkai cerita hingga ke surga-Nya."
                         </p>
-                        <h3 class="font-aesthetic text-3xl text-sky-800 font-bold drop-shadow-sm">Yoga</h3>
+                        <h3 class="font-aesthetic text-xl md:text-3xl text-sky-800 font-bold">Yoga</h3>
                     </div>
 
-                    <div class="flex flex-col items-center text-center relative px-2">
-                        <i class="fa-solid fa-quote-right absolute -top-4 md:-top-6 right-0 md:right-4 text-4xl text-sky-200 opacity-50"></i>
-                        <p class="text-slate-800 italic leading-relaxed mb-6 font-medium relative z-10 drop-shadow-sm text-sm md:text-base">
+                    <div class="flex flex-col items-center text-center relative px-2 mt-2 md:mt-0">
+                        <i class="fa-solid fa-quote-right absolute -top-2 md:-top-6 right-0 text-2xl md:text-4xl text-sky-200 opacity-40"></i>
+                        <p class="text-slate-800 italic leading-relaxed mb-3 md:mb-6 font-medium relative z-10 text-[11px] md:text-base">
                             "Dalam doaku, aku selalu meminta yang terbaik. Dan Allah mengabulkannya dengan mengirimkanmu. Bersamamu, aku menemukan rumah tempat hatiku bersandar dengan tenang."
                         </p>
-                        <h3 class="font-aesthetic text-3xl text-sky-800 font-bold drop-shadow-sm">Nafisa</h3>
+                        <h3 class="font-aesthetic text-xl md:text-3xl text-sky-800 font-bold">Nafisa</h3>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="max-w-5xl mx-auto px-4 mb-24 reveal">
-            <h2 class="font-aesthetic text-5xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mb-10 text-center">Waktu & Tempat</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="glass-panel p-8 rounded-3xl text-center hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full">
-                    <div class="w-20 h-20 mx-auto bg-white/70 rounded-full flex items-center justify-center mb-6 shadow-inner border border-white">
-                        <i class="fa-solid fa-handshake text-3xl text-sky-600"></i>
+        <section class="max-w-5xl mx-auto px-4 mb-16 md:mb-24 reveal">
+            <h2 class="font-aesthetic text-3xl md:text-5xl text-white drop-shadow-md mb-6 md:mb-10 text-center">Waktu & Tempat</h2>
+            <div class="grid md:grid-cols-2 gap-5 md:gap-8">
+                <div class="glass-panel p-5 md:p-8 rounded-3xl text-center flex flex-col h-full">
+                    <div class="w-14 h-14 md:w-20 md:h-20 mx-auto bg-white/70 rounded-full flex items-center justify-center mb-3 md:mb-6 shadow-inner border border-white">
+                        <i class="fa-solid fa-handshake text-xl md:text-3xl text-sky-600"></i>
                     </div>
-                    <h3 class="text-3xl font-aesthetic font-bold mb-3 text-slate-800">Akad Nikah</h3>
-                    <p class="font-bold text-sky-700 text-lg">Selasa, 26 Mei 2026</p>
-                    <p class="text-slate-700 font-medium mb-4">09.00 WIB - Selesai</p>
-                    <p class="text-sm text-slate-600 font-medium flex-grow">Musholah Bustanul Ulum <br> Jl. Imam Bonjol Gg.1, Kota Batu</p>
+                    <h3 class="text-xl md:text-3xl font-aesthetic font-bold mb-1 md:mb-3 text-slate-800">Akad Nikah</h3>
+                    <p class="font-bold text-sky-700 text-sm md:text-lg">Selasa, 26 Mei 2026</p>
+                    <p class="text-slate-700 font-medium mb-2 md:mb-4 text-xs md:text-base">09.00 WIB - Selesai</p>
+                    <p class="text-[11px] md:text-sm text-slate-600 font-medium flex-grow px-1">Musholah Bustanul Ulum <br> Jl. Imam Bonjol Gg.1, Kota Batu</p>
                 </div>
-                <div class="glass-panel p-8 rounded-3xl text-center hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full">
-                    <div class="w-20 h-20 mx-auto bg-white/70 rounded-full flex items-center justify-center mb-6 shadow-inner border border-white">
-                        <i class="fa-solid fa-gem text-3xl text-sky-600"></i>
+                <div class="glass-panel p-5 md:p-8 rounded-3xl text-center flex flex-col h-full">
+                    <div class="w-14 h-14 md:w-20 md:h-20 mx-auto bg-white/70 rounded-full flex items-center justify-center mb-3 md:mb-6 shadow-inner border border-white">
+                        <i class="fa-solid fa-gem text-xl md:text-3xl text-sky-600"></i>
                     </div>
-                    <h3 class="text-3xl font-aesthetic font-bold mb-3 text-slate-800">Resepsi</h3>
-                    <p class="font-bold text-sky-700 text-lg">Minggu, 31 Mei 2026</p>
-                    <p class="text-slate-700 font-medium mb-4">10.00 WIB - Selesai</p>
-                    <p class="text-sm text-slate-600 mb-8 font-medium flex-grow">Rumah Mempelai Pria <br> Jl. Aji Mustofa No.4, Torongrejo, Junrejo, Kota Batu</p>
-                    <a href="https://maps.app.goo.gl/Q1zKZwU3TamPqx5W8" target="_blank" rel="noopener noreferrer" class="inline-block bg-sky-600/90 text-white px-8 py-3 rounded-full text-sm hover:bg-sky-500 transition shadow-lg font-semibold w-full md:w-auto mx-auto mt-auto">Lihat Peta Lokasi</a>
+                    <h3 class="text-xl md:text-3xl font-aesthetic font-bold mb-1 md:mb-3 text-slate-800">Resepsi</h3>
+                    <p class="font-bold text-sky-700 text-sm md:text-lg">Minggu, 31 Mei 2026</p>
+                    <p class="text-slate-700 font-medium mb-2 md:mb-4 text-xs md:text-base">10.00 WIB - Selesai</p>
+                    <p class="text-[11px] md:text-sm text-slate-600 mb-4 md:mb-8 font-medium flex-grow px-1">Rumah Mempelai Pria <br> Jl. Aji Mustofa No.4, Torongrejo, Junrejo, Kota Batu</p>
+                    <a href="https://maps.app.goo.gl/Q1zKZwU3TamPqx5W8" target="_blank" rel="noopener noreferrer" class="inline-block bg-sky-600/90 text-white px-5 md:px-8 py-2 md:py-3 rounded-full text-xs md:text-sm hover:bg-sky-500 transition shadow-md font-semibold w-full md:w-auto mx-auto mt-auto">Lihat Peta Lokasi</a>
                 </div>
             </div>
         </section>
 
-        <section class="max-w-5xl mx-auto px-4 mb-24 text-center reveal">
-            <h2 class="font-aesthetic text-5xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mb-4">Galeri Bahagia</h2>
-            <p class="text-white/90 mb-10 text-sm font-medium drop-shadow-md">Momen kebersamaan yang kami abadikan.</p>
+        <section class="max-w-5xl mx-auto px-4 mb-16 md:mb-24 text-center reveal">
+            <h2 class="font-aesthetic text-3xl md:text-5xl text-white drop-shadow-md mb-1 md:mb-4">Galeri Bahagia</h2>
+            <p class="text-white/90 mb-6 md:mb-10 text-[10px] md:text-sm font-medium drop-shadow-md">Momen kebersamaan yang kami abadikan.</p>
             
-            <div class="glass-panel p-4 md:p-6 rounded-[2rem]">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                    
-                    <div class="col-span-2 md:col-span-4 h-64 md:h-96 rounded-xl overflow-hidden shadow-md border-2 border-white">
-                        <img src="assets/img/e.jpeg" loading="lazy" alt="Galeri Utama" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+            <div class="glass-panel p-3 md:p-6 rounded-2xl md:rounded-[2rem]">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+                    <div class="col-span-2 md:col-span-4 h-48 md:h-96 rounded-xl overflow-hidden shadow-sm border border-white">
+                        <img src="assets/img/e.jpeg" loading="lazy" alt="Galeri Utama" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
                     </div>
                     
-                    <div class="h-40 md:h-56 rounded-xl overflow-hidden shadow-md border-2 border-white"><img src="assets/img/b.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-                    <div class="h-40 md:h-56 rounded-xl overflow-hidden shadow-md border-2 border-white"><img src="assets/img/c.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-                    <div class="h-40 md:h-56 rounded-xl overflow-hidden shadow-md border-2 border-white"><img src="assets/img/d.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-                    <div class="h-40 md:h-56 rounded-xl overflow-hidden shadow-md border-2 border-white"><img src="assets/img/a.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
+                    <div class="aspect-square md:h-56 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/b.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"></div>
+                    <div class="aspect-square md:h-56 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/c.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"></div>
+                    <div class="aspect-square md:h-56 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/d.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"></div>
+                    <div class="aspect-square md:h-56 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/a.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"></div>
                     
-                    <div class="h-40 md:h-56 rounded-xl overflow-hidden shadow-md border-2 border-white"><img src="assets/img/f.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-                    <div class="h-40 md:h-56 rounded-xl overflow-hidden shadow-md border-2 border-white"><img src="assets/img/g.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-                    <div class="h-40 md:h-56 rounded-xl overflow-hidden shadow-md border-2 border-white"><img src="assets/img/h.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-                    <div class="h-40 md:h-56 rounded-xl overflow-hidden shadow-md border-2 border-white"><img src="assets/img/i.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
+                    <div class="aspect-square md:h-56 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/f.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"></div>
+                    <div class="aspect-square md:h-56 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/g.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"></div>
+                    <div class="aspect-square md:h-56 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/h.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"></div>
+                    <div class="aspect-square md:h-56 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/i.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"></div>
                     
-                    <div class="h-40 md:h-56 rounded-xl overflow-hidden shadow-md border-2 border-white col-span-1 md:col-span-2"><img src="assets/img/j.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-                    <div class="h-40 md:h-56 rounded-xl overflow-hidden shadow-md border-2 border-white"><img src="assets/img/k.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-                    <div class="h-40 md:h-56 rounded-xl overflow-hidden shadow-md border-2 border-white"><img src="assets/img/l.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
+                    <div class="col-span-2 md:col-span-2 h-32 md:h-56 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/j.jpeg" loading="lazy" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"></div>
+                    <div class="aspect-square md:h-56 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/k.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"></div>
+                    <div class="aspect-square md:h-56 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/l.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"></div>
                     
-                    <div class="col-span-2 md:col-span-4 h-48 md:h-64 rounded-xl overflow-hidden shadow-md border-2 border-white"><img src="assets/img/m.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"></div>
-
+                    <div class="col-span-2 md:col-span-4 h-32 md:h-64 rounded-xl overflow-hidden shadow-sm border border-white"><img src="assets/img/m.jpeg" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"></div>
                 </div>
             </div>
         </section>
 
-        <section class="max-w-5xl mx-auto px-4 mb-20 grid md:grid-cols-2 gap-8 reveal">
-            <div class="glass-panel rounded-[2rem] overflow-hidden h-fit shadow-xl">
-                <div class="bg-sky-600/90 backdrop-blur-md p-5 text-center text-white"><h2 class="font-bold text-xl"><i class="fa-solid fa-calendar-check mr-2"></i> Konfirmasi Kehadiran</h2></div>
-                <form id="rsvp-form" class="p-6 md:p-8 space-y-5">
+        <section class="max-w-5xl mx-auto px-4 mb-16 grid md:grid-cols-2 gap-5 md:gap-8 reveal">
+            <div class="glass-panel rounded-2xl md:rounded-[2rem] overflow-hidden h-fit shadow-lg">
+                <div class="bg-sky-600/90 backdrop-blur-md p-3 md:p-4 text-center text-white"><h2 class="font-bold md:text-xl text-sm"><i class="fa-solid fa-calendar-check mr-2"></i> Konfirmasi Kehadiran</h2></div>
+                <form id="rsvp-form" class="p-4 md:p-8 space-y-3 md:space-y-4">
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">Nama Lengkap</label>
-                        <input type="text" id="rsvp-name" required class="w-full px-4 py-3 bg-white/80 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent font-medium">
+                        <label class="block text-[10px] md:text-sm font-bold text-slate-700 mb-1">Nama Lengkap</label>
+                        <input type="text" id="rsvp-name" required class="w-full px-3 md:px-4 py-2 md:py-3 bg-white/80 border border-slate-200 rounded-lg md:rounded-xl outline-none focus:ring-2 focus:ring-sky-400 text-xs md:text-sm font-medium">
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">Kehadiran</label>
-                        <select id="rsvp-attendance" class="w-full px-4 py-3 bg-white/80 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent font-medium">
+                        <label class="block text-[10px] md:text-sm font-bold text-slate-700 mb-1">Kehadiran</label>
+                        <select id="rsvp-attendance" class="w-full px-3 md:px-4 py-2 md:py-3 bg-white/80 border border-slate-200 rounded-lg md:rounded-xl outline-none focus:ring-2 focus:ring-sky-400 text-xs md:text-sm font-medium">
                             <option value="Hadir">Akan Hadir</option>
                             <option value="Tidak Hadir">Maaf, Tidak Bisa Hadir</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">Jumlah Orang</label>
-                        <input type="number" id="rsvp-person" min="1" max="5" value="1" class="w-full px-4 py-3 bg-white/80 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent font-medium">
+                        <label class="block text-[10px] md:text-sm font-bold text-slate-700 mb-1">Jumlah Orang</label>
+                        <input type="number" id="rsvp-person" min="1" max="5" value="1" class="w-full px-3 md:px-4 py-2 md:py-3 bg-white/80 border border-slate-200 rounded-lg md:rounded-xl outline-none focus:ring-2 focus:ring-sky-400 text-xs md:text-sm font-medium">
                     </div>
-                    <button type="submit" class="w-full bg-slate-800 text-white font-bold py-4 rounded-xl hover:bg-slate-900 transition shadow-lg mt-4 flex justify-center items-center gap-2"><i class="fa-solid fa-paper-plane"></i> Kirim Konfirmasi</button>
+                    <button type="submit" class="w-full bg-slate-800 text-white font-bold py-2.5 md:py-4 rounded-lg md:rounded-xl hover:bg-slate-900 transition shadow-md mt-2 text-xs md:text-base flex justify-center items-center gap-2"><i class="fa-solid fa-paper-plane"></i> Kirim Via WA</button>
                 </form>
             </div>
             
-            <div class="glass-panel rounded-[2rem] overflow-hidden shadow-xl">
-                <div class="bg-sky-600/90 backdrop-blur-md p-5 text-center text-white"><h2 class="font-bold text-xl"><i class="fa-solid fa-comments mr-2"></i> Kirim Ucapan & Doa</h2></div>
-                <div class="p-6 md:p-8">
-                    <form id="wishes-form" class="mb-8 space-y-4">
-                        <input type="text" id="wish-name" required placeholder="Nama Anda" class="w-full px-4 py-3 bg-white/80 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent font-medium">
-                        <textarea id="wish-message" rows="3" required placeholder="Tulis doa untuk pengantin..." class="w-full px-4 py-3 bg-white/80 border border-slate-200 rounded-xl outline-none resize-none focus:ring-2 focus:ring-sky-400 focus:border-transparent font-medium"></textarea>
-                        <button type="submit" class="w-full bg-sky-600/90 text-white font-bold py-3.5 rounded-xl hover:bg-sky-500 transition shadow-lg flex justify-center items-center gap-2"><i class="fa-solid fa-heart"></i> Kirim Ucapan</button>
+            <div class="glass-panel rounded-2xl md:rounded-[2rem] overflow-hidden shadow-lg">
+                <div class="bg-sky-600/90 backdrop-blur-md p-3 md:p-4 text-center text-white"><h2 class="font-bold md:text-xl text-sm"><i class="fa-solid fa-comments mr-2"></i> Kirim Ucapan & Doa</h2></div>
+                <div class="p-4 md:p-8">
+                    <form id="wishes-form" class="mb-5 md:mb-6 space-y-2 md:space-y-4">
+                        <input type="text" id="wish-name" required placeholder="Nama Anda" class="w-full px-3 md:px-4 py-2 md:py-3 bg-white/80 border border-slate-200 rounded-lg md:rounded-xl outline-none focus:ring-2 focus:ring-sky-400 text-xs md:text-sm font-medium">
+                        <textarea id="wish-message" rows="3" required placeholder="Tulis doa untuk pengantin..." class="w-full px-3 md:px-4 py-2 md:py-3 bg-white/80 border border-slate-200 rounded-lg md:rounded-xl outline-none resize-none focus:ring-2 focus:ring-sky-400 text-xs md:text-sm font-medium"></textarea>
+                        <button type="submit" class="w-full bg-sky-600/90 text-white font-bold py-2.5 md:py-3.5 rounded-lg md:rounded-xl hover:bg-sky-500 transition shadow-md text-xs md:text-base flex justify-center items-center gap-2"><i class="fa-solid fa-heart"></i> Kirim Ucapan</button>
                     </form>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-300 pb-2 flex justify-between">Pesan Masuk <span class="bg-sky-100 text-sky-700 px-2 py-0.5 rounded-md text-sm" id="wish-count">0</span></h3>
-                    <div id="wishes-container" class="wishes-container h-60 overflow-y-auto pr-2 space-y-3">
+                    <h3 class="font-bold text-slate-800 mb-2 md:mb-4 border-b border-slate-300 pb-2 flex justify-between text-xs md:text-base">Pesan Masuk <span class="bg-sky-100 text-sky-700 px-2 py-0.5 rounded-md text-[10px] md:text-xs" id="wish-count">0</span></h3>
+                    <div id="wishes-container" class="wishes-container h-40 md:h-60 overflow-y-auto pr-2 space-y-2 md:space-y-3">
                         </div>
                 </div>
             </div>
         </section>
 
-        <section class="max-w-3xl mx-auto px-4 mb-24 reveal">
-            <div class="glass-panel p-8 md:p-12 rounded-[2rem] text-center shadow-xl">
-                <i class="fa-solid fa-gift text-5xl text-sky-600 mb-6 drop-shadow-md"></i>
-                <h2 class="font-aesthetic text-5xl text-slate-800 mb-4">Wedding Gift</h2>
-                <p class="text-slate-700 text-sm mb-10 px-2 font-medium leading-relaxed">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun, jika Anda ingin memberikan tanda kasih, kami menyediakan fitur di bawah ini.</p>
+        <section class="max-w-3xl mx-auto px-4 mb-16 md:mb-24 reveal">
+            <div class="glass-panel p-5 md:p-12 rounded-2xl md:rounded-[2rem] text-center shadow-lg">
+                <i class="fa-solid fa-gift text-3xl md:text-5xl text-sky-600 mb-3 md:mb-6 drop-shadow-md"></i>
+                <h2 class="font-aesthetic text-3xl md:text-5xl text-slate-800 mb-2 md:mb-4">Wedding Gift</h2>
+                <p class="text-slate-700 text-[10px] md:text-sm mb-6 md:mb-10 px-0 md:px-2 font-medium leading-relaxed">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun, jika Anda ingin memberikan tanda kasih, kami menyediakan fitur di bawah ini.</p>
                 
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-white/80 p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                        <img src="assets/img/bca.png" alt="BCA" loading="lazy" class="h-8 mx-auto mb-4 object-contain">
-                        <p class="text-xl font-bold text-slate-800 tracking-widest mb-1" id="rek-bca">0190878902</p>
-                        <p class="text-sm text-slate-600 font-semibold mb-6">a.n. Yoga Dimas Saputra</p>
-                        <button onclick="salinRekening('rek-bca')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl text-sm transition flex items-center justify-center gap-2 w-full font-bold">
+                <div class="grid md:grid-cols-2 gap-3 md:gap-6">
+                    <div class="bg-white/80 p-4 md:p-6 rounded-xl md:rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                        <img src="assets/img/bca.png" alt="BCA" loading="lazy" class="h-5 md:h-8 mx-auto mb-2 md:mb-4 object-contain">
+                        <p class="text-base md:text-xl font-bold text-slate-800 tracking-widest mb-1" id="rek-bca">0190878902</p>
+                        <p class="text-[10px] md:text-sm text-slate-600 font-semibold mb-4 md:mb-6">a.n. Yoga Dimas Saputra</p>
+                        <button onclick="salinRekening('rek-bca')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 md:px-4 py-2 md:py-2.5 rounded-lg md:rounded-xl text-[10px] md:text-sm transition flex items-center justify-center gap-2 w-full font-bold">
                             <i class="fa-regular fa-copy"></i> Salin Rekening
                         </button>
                     </div>
-                    <div class="bg-white/80 p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                        <img src="assets/img/bni.png" alt="BNI" loading="lazy" class="h-8 mx-auto mb-4 object-contain">
-                        <p class="text-xl font-bold text-slate-800 tracking-widest mb-1" id="rek-bni">1527763058</p>
-                        <p class="text-sm text-slate-600 font-semibold mb-6">a.n. Nafisatul Munawwaroh</p>
-                        <button onclick="salinRekening('rek-bni')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl text-sm transition flex items-center justify-center gap-2 w-full font-bold">
+                    <div class="bg-white/80 p-4 md:p-6 rounded-xl md:rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                        <img src="assets/img/bni.png" alt="BNI" loading="lazy" class="h-5 md:h-8 mx-auto mb-2 md:mb-4 object-contain">
+                        <p class="text-base md:text-xl font-bold text-slate-800 tracking-widest mb-1" id="rek-bni">1527763058</p>
+                        <p class="text-[10px] md:text-sm text-slate-600 font-semibold mb-4 md:mb-6">a.n. Nafisatul Munawwaroh</p>
+                        <button onclick="salinRekening('rek-bni')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 md:px-4 py-2 md:py-2.5 rounded-lg md:rounded-xl text-[10px] md:text-sm transition flex items-center justify-center gap-2 w-full font-bold">
                             <i class="fa-regular fa-copy"></i> Salin Rekening
                         </button>
                     </div>
@@ -345,32 +336,32 @@
             </div>
         </section>
 
-        <section class="max-w-3xl mx-auto px-6 mb-20 text-center reveal">
-            <div class="glass-panel p-8 md:p-12 rounded-[2rem] shadow-xl">
-                <p class="text-slate-800 font-medium leading-relaxed mb-8">
+        <section class="max-w-3xl mx-auto px-4 md:px-6 mb-12 md:mb-20 text-center reveal">
+            <div class="glass-panel p-5 md:p-12 rounded-2xl md:rounded-[2rem] shadow-lg">
+                <p class="text-slate-800 font-medium leading-relaxed mb-5 md:mb-8 text-[11px] md:text-base">
                     Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai. 
                     Semoga Allah SWT membalas kebaikan Bapak/Ibu/Saudara/i sekalian. Jazakumullahu khairan katsiran.
                 </p>
-                <h3 class="font-aesthetic text-4xl text-sky-700 mb-4">Wassalamualaikum Wr. Wb.</h3>
-                <p class="font-bold text-slate-600 text-sm uppercase tracking-widest mb-2">Merangkai Asa Bersama</p>
-                <h2 class="font-aesthetic text-6xl md:text-7xl mt-4 text-sky-800 drop-shadow-sm">Yoga & Nafisa</h2>
+                <h3 class="font-aesthetic text-2xl md:text-4xl text-sky-700 mb-2 md:mb-4">Wassalamualaikum Wr. Wb.</h3>
+                <p class="font-bold text-slate-600 text-[9px] md:text-sm uppercase tracking-widest mb-1 md:mb-2">Merangkai Asa Bersama</p>
+                <h2 class="font-aesthetic text-4xl md:text-7xl mt-2 md:mt-4 text-sky-800 drop-shadow-sm">Yoga & Nafisa</h2>
             </div>
         </section>
 
-        <footer class="text-center pb-10 reveal">
-            <p class="text-sm font-semibold text-white/90 drop-shadow-md tracking-wide">
+        <footer class="text-center pb-6 md:pb-10 reveal">
+            <p class="text-[9px] md:text-sm font-semibold text-white/90 drop-shadow-md tracking-wide px-4">
                 Created with <i class="fa-solid fa-heart text-red-500 animate-pulse mx-1"></i> from Nafisa to Yoga
             </p>
         </footer>
 
     </main>
 
-    <button id="music-btn" onclick="toggleMusic()" class="fixed bottom-6 right-6 z-40 bg-white/90 backdrop-blur-md text-sky-600 border-2 border-white w-14 h-14 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex justify-center items-center hidden transition-transform hover:scale-110">
-        <i class="fa-solid fa-music animate-spin text-xl" id="music-icon"></i>
+    <button id="music-btn" onclick="toggleMusic()" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-40 bg-white/90 backdrop-blur-md text-sky-600 border-2 border-sky-100 w-10 h-10 md:w-14 md:h-14 rounded-full shadow-lg flex justify-center items-center hidden transition-transform hover:scale-110">
+        <i class="fa-solid fa-music animate-spin text-sm md:text-xl" id="music-icon"></i>
     </button>
 
     <script>
-        // 1. DOM Load & Inisialisasi
+        // 1. Inisialisasi & URL Parameter Nama
         document.addEventListener("DOMContentLoaded", () => {
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('to');
@@ -383,9 +374,25 @@
             createPetals();
         });
 
-        // 2. Fungsi Buka Undangan (Memicu Video & Audio)
+        // 2. Logika RSVP WhatsApp
+        document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            const nama = document.getElementById('rsvp-name').value;
+            const kehadiran = document.getElementById('rsvp-attendance').value;
+            const jumlah = document.getElementById('rsvp-person').value;
+
+            const pesanWA = `Assalamu'alaikum,\n\n Saya *${nama}*.\nSesuai dengan undangan yang diberikan, InsyaAllah saya *${kehadiran}* pada acara pernikahan kalian dengan jumlah *${jumlah} orang*.\n\nSelamat mempersiapkan hari bahagia dan semoga lancar sampai hari H!`;
+            const nomorWA = "6283834447605"; 
+            const urlWhatsApp = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesanWA)}`;
+            
+            window.open(urlWhatsApp, '_blank');
+            
+            document.getElementById('rsvp-name').value = '';
+            document.getElementById('rsvp-person').value = '1';
+        });
+
+        // 3. Audio Controller
         const music = document.getElementById("bg-music");
-        const video = document.getElementById("hero-video");
         let isPlaying = false;
         
         function bukaUndangan() {
@@ -393,15 +400,10 @@
             document.body.classList.remove("no-scroll");
             document.getElementById("music-btn").classList.remove("hidden");
             
-            music.play().catch(e => console.log("Audio play diizinkan setelah interaksi."));
+            music.play().catch(e => console.log("Audio diizinkan setelah interaksi"));
             isPlaying = true;
-            
-            if(video) {
-                video.play().catch(e => console.log("Video play autoplay."));
-            }
         }
 
-        // 3. Toggle Musik
         function toggleMusic() {
             const icon = document.getElementById("music-icon");
             if (isPlaying) {
@@ -416,7 +418,7 @@
             isPlaying = !isPlaying;
         }
 
-        // 4. Countdown Timer presisi tinggi
+        // 4. Countdown
         const countDownDate = new Date("May 31, 2026 10:00:00").getTime();
         const timer = setInterval(function() {
             const now = new Date().getTime();
@@ -440,9 +442,7 @@
             });
         }
 
-        // 6. Logika Buku Tamu / Wishes UI
-        document.getElementById('rsvp-form').addEventListener('submit', function(e) { e.preventDefault(); alert('Terima kasih! Konfirmasi kehadiran Anda telah tersimpan.'); });
-        
+        // 6. Buku Tamu / Wishes 
         const wishesContainer = document.getElementById('wishes-container');
         let wishesData = [{ nama: "Keluarga Besar", pesan: "Selamat menempuh hidup baru. Semoga menjadi keluarga yang sakinah, mawaddah, warahmah." }];
         
@@ -450,9 +450,9 @@
             wishesContainer.innerHTML = '';
             wishesData.forEach(wish => {
                 wishesContainer.innerHTML += `
-                <div class="bg-white/80 p-4 rounded-2xl border border-slate-100 shadow-sm">
-                    <h4 class="font-bold text-sm text-sky-800">${wish.nama}</h4>
-                    <p class="text-xs text-slate-600 mt-1.5 font-medium leading-relaxed">${wish.pesan}</p>
+                <div class="bg-white/80 p-3 md:p-4 rounded-xl border border-slate-100 shadow-sm">
+                    <h4 class="font-bold text-xs md:text-sm text-sky-800">${wish.nama}</h4>
+                    <p class="text-[10px] md:text-xs text-slate-700 mt-1 font-medium leading-relaxed">${wish.pesan}</p>
                 </div>`;
             });
             document.getElementById('wish-count').innerText = wishesData.length;
@@ -465,25 +465,31 @@
             renderWishes(); document.getElementById('wish-message').value = '';
         });
 
-        // 7. Scroll Reveal Animation 
+        // 7. Scroll Reveal Animation
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 80) { reveals[i].classList.add("active"); }
+                var point = window.innerWidth < 768 ? 50 : 100;
+                if (elementTop < windowHeight - point) { 
+                    reveals[i].classList.add("active"); 
+                }
             }
         }
-        window.addEventListener("scroll", reveal); reveal();
+        window.addEventListener("scroll", reveal, {passive: true}); 
+        reveal();
 
-        // 8. Kelopak Bunga (Dioptimasi)
+        // 8. Kelopak Bunga Cerdas
         function createPetals() {
             const container = document.getElementById('petal-container');
-            const petalCount = 25; // Diturunkan dari 40 ke 25 agar HP tidak lag
+            const isMobile = window.innerWidth < 768;
+            const petalCount = isMobile ? 12 : 25; 
+            
             for (let i = 0; i < petalCount; i++) {
                 const petal = document.createElement('span');
                 petal.classList.add('petal');
-                const size = Math.random() * 12 + 8 + 'px';
+                const size = Math.random() * (isMobile ? 8 : 12) + 8 + 'px';
                 petal.style.width = size;
                 petal.style.height = size;
                 petal.style.left = Math.random() * 100 + 'vw';
