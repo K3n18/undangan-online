@@ -15,18 +15,21 @@
     <link rel="icon" type="image/png" href="assets/img/yn.png?v=2">
 
     <style>
+        /* Pengaturan Dasar Halaman */
         body { font-family: 'Poppins', sans-serif; background-color: #0f172a; overflow-x: hidden; }
         .font-aesthetic { font-family: 'Dancing Script', cursive; }
         .font-arabic { font-family: 'Amiri', serif; }
         
-        cover-page { 
+        /* Animasi Cover Saat Tombol Buka Ditekan */
+        #cover-page { 
             transition: transform 1s cubic-bezier(0.86, 0, 0.07, 1), opacity 1s ease-out; 
             transform-origin: center top;
             will-change: transform, opacity;
         }
         .hide-cover { transform: translateY(-100%); opacity: 0; pointer-events: none; }
-        .no-scroll { overflow: hidden; }
+        .no-scroll { overflow: hidden; } /* Mencegah user scroll sebelum buka undangan */
 
+        /* Pengaturan Background Slideshow */
         .bg-slideshow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -10;
         }
@@ -41,6 +44,7 @@
             will-change: opacity, transform;
         }
         
+        /* Urutan & Jeda Waktu Munculnya Foto Background */
         .bg-slideshow div:nth-child(1) { background-image: url('assets/img/1.jpeg'); animation-delay: 0s; }
         .bg-slideshow div:nth-child(2) { background-image: url('assets/img/2.jpeg'); animation-delay: 5s; }
         .bg-slideshow div:nth-child(3) { background-image: url('assets/img/3.jpeg'); animation-delay: 10s; }
@@ -50,6 +54,7 @@
         .bg-slideshow div:nth-child(7) { background-image: url('assets/img/7.jpeg'); animation-delay: 30s; }
         .bg-slideshow div:nth-child(8) { background-image: url('assets/img/cover.jpeg'); animation-delay: 35s; }
 
+        /* Rumus Animasi Fade (Muncul dan Menghilang Halus) */
         @keyframes fadeSlide {
             0%   { opacity: 0; transform: scale(1); }
             5%   { opacity: 1; }
@@ -58,21 +63,32 @@
             100% { opacity: 0; }
         }
 
+        /* Desain Kotak Transparan (Glassmorphism) */
+        /* Desain Kotak Transparan (Glassmorphism) */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            /* Angka 0.85 diubah menjadi 0.6 agar lebih transparan */
+            background: rgba(255, 255, 255, 0.6); 
+            
+            /* (Opsional) Angka blur diubah dari 8px ke 5px agar foto di belakangnya lebih terlihat bentuknya */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            
+            /* Garis tepi juga sedikit ditipiskan agar lebih elegan */
+            border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
         }
 
+
+        /* Animasi Elemen Muncul Saat Di-scroll (Scroll Reveal) */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease-out; will-change: opacity, transform; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* Mempercantik Scrollbar Buku Tamu */
         .wishes-container::-webkit-scrollbar { width: 4px; }
         .wishes-container::-webkit-scrollbar-track { background: rgba(255,255,255,0.3); border-radius: 10px; }
         .wishes-container::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 10px; }
 
+        /* Pengaturan Hujan Kelopak Bunga */
         #petal-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: -5; overflow: hidden;
@@ -97,10 +113,11 @@
 <body class="text-slate-800 no-scroll">
 
     <audio id="bg-music" loop preload="none">
-        <source src="assets/audio/OST.mpeg" type="audio/mpeg">
+        <source src="assets/audio/bg_music.mpeg" type="audio/mpeg">
     </audio>
 
     <div id="petal-container"></div>
+    
     <div class="bg-slideshow">
         <div></div><div></div><div></div><div></div>
         <div></div><div></div><div></div><div></div>
@@ -122,33 +139,35 @@
 
     <main id="main-content" class="min-h-screen pb-10">
         
-        <section class="relative w-full min-h-screen flex flex-col items-center justify-center pt-12 pb-16 reveal">
-            <div class="absolute inset-0 z-0 flex items-center justify-center overflow-hidden rounded-b-[30px] md:rounded-b-[40px] shadow-2xl mx-3 md:mx-4 mt-3 md:mt-4 h-[55vh] md:h-[80vh] border border-white/20 bg-slate-900">
-                 <img src="assets/img/cover.jpeg" class="w-full h-full object-contain md:object-cover object-center opacity-70" alt="Background Cover" loading="lazy">
-                 
-                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-transparent"></div>
-            </div>
+        <section class="relative w-full flex flex-col items-center justify-center pt-3 md:pt-4 pb-12 reveal">
             
-            <div class="relative z-10 text-center text-white px-4 mt-auto mb-4 md:mb-10 w-full">
-                <p class="tracking-widest text-xs md:text-sm mb-2 uppercase text-sky-300">Menuju Hari Bahagia</p>
-                <h2 class="font-aesthetic text-4xl sm:text-5xl md:text-8xl drop-shadow-lg mb-6 md:mb-10">Yoga & Nafisa</h2>
+            <div class="relative w-[calc(100%-24px)] md:w-[calc(100%-32px)] h-[75vh] md:h-[85vh] rounded-[30px] md:rounded-[40px] overflow-hidden shadow-2xl border border-white/20 bg-slate-900 flex flex-col justify-end items-center pb-8 md:pb-16">
                 
-                <div class="flex justify-center gap-2 sm:gap-3 md:gap-5 mt-4 flex-wrap">
-                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg">
-                        <span id="hari" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
-                        <span class="text-[9px] md:text-sm font-semibold">Hari</span>
-                    </div>
-                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg">
-                        <span id="jam" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
-                        <span class="text-[9px] md:text-sm font-semibold">Jam</span>
-                    </div>
-                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg">
-                        <span id="menit" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
-                        <span class="text-[9px] md:text-sm font-semibold">Menit</span>
-                    </div>
-                    <div class="glass-panel text-slate-800 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg">
-                        <span id="detik" class="block text-lg md:text-4xl font-bold text-sky-700">00</span>
-                        <span class="text-[9px] md:text-sm font-semibold">Detik</span>
+                <img src="assets/img/cover.jpeg" class="absolute inset-0 w-full h-full object-contain md:object-cover object-center opacity-70 z-0" alt="Background Cover" loading="lazy">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/40 to-transparent z-0"></div>
+                
+                <div class="relative z-10 text-center text-white px-4 w-full">
+                    <p class="tracking-widest text-xs md:text-sm mb-2 uppercase text-sky-300 drop-shadow-md">Menuju Hari Bahagia</p>
+                    <h2 class="font-aesthetic text-5xl sm:text-6xl md:text-8xl drop-shadow-lg mb-6 md:mb-10">Yoga & Nafisa</h2>
+                    
+                    <div class="flex justify-center gap-2 sm:gap-3 md:gap-5 mt-4 flex-wrap">
+                        <div class="bg-slate-200 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg border border-slate-300">
+                            <span id="hari" class="block text-xl md:text-4xl font-bold text-sky-700">00</span>
+                            <span class="text-[10px] md:text-sm font-bold tracking-wide text-slate-800">Hari</span>
+                        </div>
+                        <div class="bg-slate-200 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg border border-slate-300">
+                            <span id="jam" class="block text-xl md:text-4xl font-bold text-sky-700">00</span>
+                            <span class="text-[10px] md:text-sm font-bold tracking-wide text-slate-800">Jam</span>
+                        </div>
+                        <div class="bg-slate-200 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg border border-slate-300">
+                            <span id="menit" class="block text-xl md:text-4xl font-bold text-sky-700">00</span>
+                            <span class="text-[10px] md:text-sm font-bold tracking-wide text-slate-800">Menit</span>
+                        </div>
+                        <div class="bg-slate-200 rounded-xl md:rounded-2xl p-2 md:p-4 w-14 sm:w-20 md:w-24 shadow-lg border border-slate-300">
+                            <span id="detik" class="block text-xl md:text-4xl font-bold text-sky-700">00</span>
+                            <span class="text-[10px] md:text-sm font-bold tracking-wide text-slate-800">Detik</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -159,7 +178,8 @@
                 <i class="fa-solid fa-quote-right absolute top-4 right-5 md:top-6 md:right-8 text-2xl md:text-4xl text-sky-200 opacity-50"></i>
                 <p class="font-arabic text-lg md:text-3xl leading-relaxed md:leading-loose text-slate-800 mb-3 md:mb-6 drop-shadow-sm" dir="rtl">وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ</p>
                 <p class="text-[10px] md:text-sm text-slate-700 italic leading-relaxed mb-3 md:mb-4">
-                    "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang..."
+                    "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, 
+                    dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda(Kebesaran Allah) bagi kaum yang berpikir."
                 </p>
                 <p class="font-bold text-sky-700 text-[11px] md:text-base">(QS. Ar-Rum: 21)</p>
             </div>
@@ -219,7 +239,6 @@
 
         <section class="max-w-4xl mx-auto px-4 mb-20 md:mb-32 reveal">
             <h2 class="font-aesthetic text-3xl md:text-5xl text-white drop-shadow-md mb-12 md:mb-20 text-center">Intimate Words</h2>
-            
             <div class="glass-panel p-6 md:p-12 rounded-3xl md:rounded-[2rem] relative">
                 <div class="w-20 h-20 md:w-36 md:h-36 rounded-full overflow-hidden shadow-xl border-4 border-white absolute -top-10 md:-top-16 left-1/2 transform -translate-x-1/2 z-20 bg-white">
                     <img src="assets/img/love.jpeg" loading="lazy" class="w-full h-full object-cover">
@@ -229,8 +248,8 @@
                     <div class="flex flex-col items-center text-center relative px-2 md:border-r border-slate-300/50 pb-5 md:pb-0 border-b md:border-b-0">
                         <i class="fa-solid fa-quote-left absolute -top-2 md:-top-6 left-0 text-2xl md:text-4xl text-sky-200 opacity-40"></i>
                         <p class="text-slate-800 italic leading-relaxed mb-3 md:mb-6 font-medium relative z-10 text-[11px] md:text-base">
-                            "A beautiful chapter begins not just when our eyes met, but when our souls decided to walk toward Allah, hand in hand.
-                            I'm grateful for every moment that led us here, and I can't wait to see what Allah has in store for us in this journey of love and faith."
+                            "A beautiful chapter begins not just when our eyes met, but when our souls decided to walk toward Allah, hand in hand. I'm grateful for every moment that led us here, 
+                            'n I can't wait to see what Allah has in store for us in this journey of love 'n faith."
                         </p>
                         <h3 class="font-aesthetic text-xl md:text-3xl text-sky-800 font-bold">Yoga</h3>
                     </div>
@@ -248,7 +267,7 @@
         </section>
 
         <section class="max-w-5xl mx-auto px-4 mb-16 md:mb-24 text-center reveal">
-            <h2 class="font-aesthetic text-3xl md:text-5xl text-white drop-shadow-md mb-1 md:mb-4">Galeri Bahagia</h2>
+            <h2 class="font-aesthetic text-3xl md:text-5xl text-white drop-shadow-md mb-1 md:mb-4">Glimpses of Us</h2>
             <p class="text-white/90 mb-6 md:mb-10 text-[10px] md:text-sm font-medium drop-shadow-md">Momen kebersamaan yang kami abadikan.</p>
             
             <div class="glass-panel p-3 md:p-6 rounded-2xl md:rounded-[2rem]">
@@ -277,6 +296,7 @@
         </section>
 
         <section class="max-w-5xl mx-auto px-4 mb-16 grid md:grid-cols-2 gap-5 md:gap-8 reveal">
+            
             <div class="glass-panel rounded-2xl md:rounded-[2rem] overflow-hidden h-fit shadow-lg">
                 <div class="bg-sky-600/90 backdrop-blur-md p-3 md:p-4 text-center text-white"><h2 class="font-bold md:text-xl text-sm"><i class="fa-solid fa-calendar-check mr-2"></i> Konfirmasi Kehadiran</h2></div>
                 <form id="rsvp-form" class="p-4 md:p-8 space-y-3 md:space-y-4">
@@ -309,7 +329,7 @@
                     </form>
                     <h3 class="font-bold text-slate-800 mb-2 md:mb-4 border-b border-slate-300 pb-2 flex justify-between text-xs md:text-base">Pesan Masuk <span class="bg-sky-100 text-sky-700 px-2 py-0.5 rounded-md text-[10px] md:text-xs" id="wish-count">0</span></h3>
                     <div id="wishes-container" class="wishes-container h-40 md:h-60 overflow-y-auto pr-2 space-y-2 md:space-y-3">
-                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -365,21 +385,29 @@
         <i class="fa-solid fa-music animate-spin text-sm md:text-xl" id="music-icon"></i>
     </button>
 
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
     <script>
-        // 1. Inisialisasi & URL Parameter Nama
+        // --- 1. INISIALISASI NAMA TAMU & KELOPAK ---
+        // Fungsi ini akan berjalan otomatis saat halaman pertama kali dibuka
         document.addEventListener("DOMContentLoaded", () => {
+            // Mengambil nama dari link (contoh: nay.my.id/?to=Budi)
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('to');
+            
+            // Jika ada nama, masukkan ke halaman sampul dan kolom isian
             if (guestName) {
                 const decoded = decodeURIComponent(guestName);
                 document.getElementById('guest-name').innerText = decoded;
                 document.getElementById('rsvp-name').value = decoded; 
                 document.getElementById('wish-name').value = decoded; 
             }
-            createPetals();
+            createPetals(); // Panggil fungsi hujan bunga
         });
 
-        // 2. Logika RSVP WhatsApp
+        // --- 2. LOGIKA RSVP WHATSAPP ---
+        // Mengubah isian form kehadiran menjadi format chat WA
         document.getElementById('rsvp-form').addEventListener('submit', function(e) {
             e.preventDefault(); 
             const nama = document.getElementById('rsvp-name').value;
@@ -390,25 +418,28 @@
             const nomorWA = "6283834447605"; 
             const urlWhatsApp = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesanWA)}`;
             
-            window.open(urlWhatsApp, '_blank');
+            window.open(urlWhatsApp, '_blank'); // Buka link WA di tab baru
             
+            // Kembalikan form seperti semula
             document.getElementById('rsvp-name').value = '';
             document.getElementById('rsvp-person').value = '1';
         });
 
-        // 3. Audio Controller
+        // --- 3. KONTROL AUDIO & BUKA UNDANGAN ---
         const music = document.getElementById("bg-music");
         let isPlaying = false;
         
+        // Fungsi yang berjalan saat tombol "Buka Undangan" diklik
         function bukaUndangan() {
-            document.getElementById("cover-page").classList.add("hide-cover");
-            document.body.classList.remove("no-scroll");
-            document.getElementById("music-btn").classList.remove("hidden");
+            document.getElementById("cover-page").classList.add("hide-cover"); // Geser cover ke atas
+            document.body.classList.remove("no-scroll"); // Izinkan scroll ke bawah
+            document.getElementById("music-btn").classList.remove("hidden"); // Munculkan tombol musik
             
             music.play().catch(e => console.log("Audio diizinkan setelah interaksi"));
             isPlaying = true;
         }
 
+        // Fungsi menghidupkan/mematikan musik
         function toggleMusic() {
             const icon = document.getElementById("music-icon");
             if (isPlaying) {
@@ -423,21 +454,25 @@
             isPlaying = !isPlaying;
         }
 
-        // 4. Countdown
+        // --- 4. HITUNG MUNDUR (COUNTDOWN) ---
         const countDownDate = new Date("May 31, 2026 10:00:00").getTime();
         const timer = setInterval(function() {
             const now = new Date().getTime();
-            const distance = countDownDate - now;
+            const distance = countDownDate - now; // Hitung sisa waktu
+            
+            // Jika hari H sudah terlewati, matikan perhitungan
             if (distance < 0) {
                 clearInterval(timer); return;
             }
+            
+            // Masukkan hitungan ke dalam HTML, padStart(2, '0') agar format selalu 2 digit (contoh: 09)
             document.getElementById("hari").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById("jam").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             document.getElementById("menit").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
             document.getElementById("detik").innerHTML = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        // 5. Salin Nomor Rekening
+        // --- 5. FUNGSI SALIN REKENING (COPY) ---
         function salinRekening(idElement) {
             const norek = document.getElementById(idElement).innerText;
             navigator.clipboard.writeText(norek).then(() => {
@@ -447,76 +482,123 @@
             });
         }
 
-        // 6. Buku Tamu / Wishes 
+        // --- 6. LOGIKA BUKU TAMU (FIREBASE + FORMSPREE) ---
+        
+        // Konfigurasi Database Firebase Anda
+        const firebaseConfig = {
+            apiKey: "AIzaSyDK9X5aNNbYRdoBV0O_UInbhUuQPJ9Dk1k",
+            authDomain: "invitation-d67bd.firebaseapp.com",
+            databaseURL: "https://invitation-d67bd-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "invitation-d67bd",
+            storageBucket: "invitation-d67bd.firebasestorage.app",
+            messagingSenderId: "917772701028",
+            appId: "1:917772701028:web:a62a58a55755349ebcfe71"
+        };
+
+        // Mulai jalankan Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const wishesRef = database.ref('wishes');
+
         const wishesContainer = document.getElementById('wishes-container');
-        let wishesData = [{ nama: "Keluarga Besar", pesan: "Selamat menempuh hidup baru. Semoga menjadi keluarga yang sakinah, mawaddah, warahmah." }];
-        
-        function renderWishes() {
-            wishesContainer.innerHTML = '';
-            wishesData.forEach(wish => {
-                wishesContainer.innerHTML += `
-                <div class="bg-white/80 p-3 md:p-4 rounded-xl border border-slate-100 shadow-sm">
-                    <h4 class="font-bold text-[13px] md:text-sm text-sky-800">${wish.nama}</h4>
-                    <p class="text-[11px] md:text-xs text-slate-700 mt-1 font-medium leading-relaxed">${wish.pesan}</p>
-                </div>`;
-            });
-            document.getElementById('wish-count').innerText = wishesData.length;
-        }
-        renderWishes();
-        
-        // --- KODE BARU UNTUK KIRIM KE EMAIL (FORMSPREE) ---
-        document.getElementById('wishes-form').addEventListener('submit', function(e) {
+        const wishesForm = document.getElementById('wishes-form');
+
+        // A. Fungsi Mengirim Pesan
+        wishesForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const btn = this.querySelector('button[type="submit"]');
             const originalText = btn.innerHTML;
-            const namaTamu = document.getElementById('wish-name').value;
-            const pesanTamu = document.getElementById('wish-message').value;
+            const nama = document.getElementById('wish-name').value;
+            const pesan = document.getElementById('wish-message').value;
 
-            // Ganti teks tombol saat loading
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim...';
             btn.disabled = true;
 
-            // GANTI LINK DI BAWAH INI DENGAN LINK FORMSPREE ANDA
-            const formspreeLink = 'https://formspree.io/f/mlganvbj'; 
+            // 1. Simpan ke Firebase (Real-time di Web)
+            const newWishRef = wishesRef.push();
+            const wishId = newWishRef.key;
 
-            fetch(formspreeLink, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    Nama: namaTamu,
-                    Ucapan: pesanTamu
-                })
-            }).then(response => {
-                if (response.ok) {
-                    // Jika sukses kirim ke email, munculkan juga di layar web
-                    wishesData.unshift({ nama: namaTamu, pesan: pesanTamu });
-                    renderWishes(); 
-                    
-                    // Kosongkan form
-                    document.getElementById('wish-name').value = '';
-                    document.getElementById('wish-message').value = '';
-                } else {
-                    alert('Ups, terjadi kesalahan saat mengirim ucapan ke server.');
-                }
-            }).catch(error => {
-                alert('Gagal mengirim ucapan, periksa koneksi internet Anda.');
+            newWishRef.set({
+                id: wishId,
+                nama: nama,
+                pesan: pesan,
+                timestamp: Date.now()
+            }).then(() => {
+                // Simpan kunci ID ke memori HP (Agar fitur EDIT bisa berfungsi nanti)
+                localStorage.setItem('my_wish_id', wishId);
+                
+                // 2. Kirim Notifikasi ke Email (Formspree)
+                const formspreeLink = 'https://formspree.io/f/mlganvbj'; 
+                fetch(formspreeLink, {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ Nama: nama, Ucapan: pesan })
+                });
+
+                wishesForm.reset();
+            }).catch((error) => {
+                alert("Terjadi kesalahan saat mengirim pesan.");
+                console.error(error);
             }).finally(() => {
-                // Kembalikan tombol ke keadaan semula
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             });
         });
 
-        // 7. Scroll Reveal Animation
+        // B. Fungsi Menampilkan Pesan Secara Real-time (Otomatis tanpa Refresh)
+        wishesRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            wishesContainer.innerHTML = '';
+            let count = 0;
+            
+            // Cek apakah tamu ini pernah mengirim pesan di HP ini
+            const myWishId = localStorage.getItem('my_wish_id');
+
+            if (data) {
+                // Susun urutan pesan dari yang paling baru
+                const sortedWishes = Object.values(data).sort((a, b) => b.timestamp - a.timestamp);
+                
+                sortedWishes.forEach(wish => {
+                    count++;
+                    const isMyWish = wish.id === myWishId;
+                    
+                    // Cetak kotak pesannya ke layar
+                    wishesContainer.innerHTML += `
+                    <div class="bg-white/80 p-4 rounded-2xl border ${isMyWish ? 'border-sky-400 bg-sky-50' : 'border-slate-100'} shadow-sm relative group">
+                        <h4 class="font-bold text-sm text-sky-800">${wish.nama} ${isMyWish ? '<span class="text-[10px] bg-sky-200 px-1.5 rounded ml-1 text-sky-700">Anda</span>' : ''}</h4>
+                        <p id="text-${wish.id}" class="text-xs text-slate-600 mt-1.5 font-medium leading-relaxed">${wish.pesan}</p>
+                        
+                        ${isMyWish ? `
+                            <button onclick="editWish('${wish.id}')" class="absolute top-3 right-3 text-sky-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i class="fa-solid fa-pen-to-square text-xs"></i> Edit
+                            </button>
+                        ` : ''}
+                    </div>`;
+                });
+            }
+            document.getElementById('wish-count').innerText = count; // Perbarui Total Pesan
+        });
+
+        // C. Fungsi Mengedit Pesan 
+        window.editWish = function(id) {
+            const currentText = document.getElementById(`text-${id}`).innerText;
+            const newText = prompt("Ubah ucapan Anda:", currentText);
+            
+            if (newText !== null && newText.trim() !== "") {
+                database.ref('wishes/' + id).update({
+                    pesan: newText
+                });
+            }
+        }
+
+        // --- 7. ANIMASI SCROLL (MUNCUL PERLAHAN) ---
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
+                // Titik muncul: HP lebih cepat (50px) dibanding laptop (100px)
                 var point = window.innerWidth < 768 ? 50 : 100;
                 if (elementTop < windowHeight - point) { 
                     reveals[i].classList.add("active"); 
@@ -524,17 +606,20 @@
             }
         }
         window.addEventListener("scroll", reveal, {passive: true}); 
-        reveal();
+        reveal(); // Jalankan sekali saat pertama dimuat
 
-        // 8. Kelopak Bunga Cerdas
+        // --- 8. FUNGSI HUJAN KELOPAK BUNGA ---
         function createPetals() {
             const container = document.getElementById('petal-container');
             const isMobile = window.innerWidth < 768;
+            // Agar HP tidak lag, kurangi jumlah kelopak (12 untuk HP, 25 untuk laptop)
             const petalCount = isMobile ? 12 : 25; 
             
             for (let i = 0; i < petalCount; i++) {
                 const petal = document.createElement('span');
                 petal.classList.add('petal');
+                
+                // Ukuran, letak jatuh, dan kecepatan kelopak dibuat acak/random
                 const size = Math.random() * (isMobile ? 8 : 12) + 8 + 'px';
                 petal.style.width = size;
                 petal.style.height = size;
@@ -542,6 +627,7 @@
                 petal.style.top = Math.random() * -100 + 'vh';
                 petal.style.animationDuration = Math.random() * 8 + 6 + 's';
                 petal.style.animationDelay = Math.random() * 10 + 's';
+                
                 container.appendChild(petal);
             }
         }
