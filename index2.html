@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Undangan Pernikahan - Yoga & Nafisa</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600&family=Amiri&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="icon" type="image/png" href="assets/img/yn.png?v=2">
+
+    <style>
+        /* TEMA TERANG WATERCOLOR */
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #f0f8ff; /* Biru sangat muda (Alice Blue) */
+            color: #0f172a;
+            overflow-x: hidden; 
+        }
+        .font-aesthetic { font-family: 'Dancing Script', cursive; }
+        .font-arabic { font-family: 'Amiri', serif; }
+        
+        /* Bingkai Statis di Pinggir Layar (Seperti di Video) */
+        .floral-frame {
+            position: fixed; inset: 0; pointer-events: none; z-index: 40;
+            /* Anda bisa mengganti URL di bawah dengan gambar bingkai bunga PNG transparan milik Anda nanti */
+            background-image: 
+                radial-gradient(circle at top left, rgba(186, 230, 253, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at bottom right, rgba(186, 230, 253, 0.4) 0%, transparent 40%);
+            border: 15px solid rgba(255,255,255,0.5);
+        }
+
+        /* Halaman Pembuka (Cover) */
+        #cover-page { 
+            transition: transform 1s cubic-bezier(0.86, 0, 0.07, 1), opacity 1s ease-out; 
+            transform-origin: center top;
+            will-change: transform, opacity;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+        }
+        .hide-cover { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+        .no-scroll { overflow: hidden; }
+
+        /* Panel Kertas / Watercolor (Bukan Kaca Gelap Lagi) */
+        .paper-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(224, 242, 254, 0.6);
+            box-shadow: 0 10px 40px -10px rgba(2, 132, 199, 0.1);
+        }
+
+        /* Animasi Scroll Reveal (Muncul dari bawah perlahan) */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; will-change: opacity, transform; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Scrollbar */
+        .wishes-container::-webkit-scrollbar { width: 4px; }
+        .wishes-container::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
+        .wishes-container::-webkit-scrollbar-thumb { background: #7dd3fc; border-radius: 10px; }
+
+        /* Animasi Kupu-kupu Melayang */
+        .butterfly {
+            position: absolute; pointer-events: none; z-index: 30;
+            animation: flutter 6s ease-in-out infinite alternate, floatUp 15s linear infinite;
+            opacity: 0.7; font-size: 24px; color: #38bdf8;
+        }
+        @keyframes flutter {
+            0% { transform: scaleX(1) rotate(-15deg); }
+            50% { transform: scaleX(0.3) rotate(0deg); }
+            100% { transform: scaleX(1) rotate(15deg); }
+        }
+        @keyframes floatUp {
+            0% { bottom: -10%; left: 20%; }
+            100% { bottom: 110%; left: 80%; }
+        }
+    </style>
+</head>
+<body class="no-scroll relative">
+
+    <audio id="bg-music" loop preload="none">
+        <source src="assets/audio/OST.mpeg" type="audio/mpeg">
+    </audio>
+
+    <div class="floral-frame"></div>
+
+    <i class="fa-solid fa-seedling butterfly" style="left: 10%; animation-delay: 0s;"></i>
+    <i class="fa-solid fa-leaf butterfly" style="left: 70%; animation-delay: 2s; color: #7dd3fc; font-size: 18px;"></i>
+    <i class="fa-solid fa-seedling butterfly" style="left: 40%; animation-delay: 5s; font-size: 30px;"></i>
+
+    <section id="cover-page" class="fixed inset-0 z-50 flex flex-col justify-center items-center text-center p-4">
+        <div class="w-full max-w-sm border-2 border-sky-200 p-8 rounded-[40px] bg-white/60 backdrop-blur-sm shadow-xl flex flex-col items-center">
+            <p class="text-[10px] md:text-sm tracking-widest mb-2 uppercase text-sky-600 font-semibold">The Wedding Of</p>
+            <h1 class="font-aesthetic text-5xl sm:text-6xl md:text-7xl mb-6 text-sky-900 drop-shadow-sm">Yoga & Nafisa</h1>
+            
+            <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white shadow-md mb-6">
+                <img src="assets/img/cover.jpeg" class="w-full h-full object-cover" alt="Cover">
+            </div>
+
+            <div class="mb-6 w-full">
+                <p class="text-[10px] md:text-sm mb-1 text-slate-500 font-medium">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+                <h2 id="guest-name" class="text-lg font-bold text-sky-800 break-words">Tamu Undangan</h2>
+            </div>
+
+            <button onclick="bukaUndangan()" class="bg-sky-600 hover:bg-sky-700 text-white px-6 py-2.5 rounded-full font-semibold transition-all shadow-md hover:scale-105 flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-envelope-open"></i> Buka Undangan
+            </button>
+        </div>
+    </section>
+
+    <main id="main-content" class="min-h-screen pb-20 relative z-10 flex flex-col items-center pt-20 px-4 space-y-24">
+        
+        <section class="max-w-2xl text-center reveal w-full pt-10">
+            <div class="paper-panel p-8 md:p-12 rounded-[2rem]">
+                <img src="assets/img/yn.png" class="w-16 mx-auto mb-4 opacity-80" alt="Icon" onerror="this.style.display='none'">
+                <p class="font-arabic text-xl md:text-3xl leading-loose text-sky-900 mb-4" dir="rtl">وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+                <p class="text-[11px] md:text-sm text-slate-600 italic leading-relaxed mb-3">
+                    "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang..."
+                </p>
+                <p class="font-bold text-sky-700 text-xs md:text-sm">(QS. Ar-Rum: 21)</p>
+            </div>
+        </section>
+
+        <section class="max-w-3xl text-center reveal w-full">
+            <h3 class="font-aesthetic text-3xl md:text-5xl text-sky-800 mb-2">Assalamu'alaikum</h3>
+            <p class="text-slate-600 mb-10 text-[11px] md:text-sm leading-relaxed px-4">
+                Dengan memohon Rahmat dan Ridha Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami:
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="flex flex-col items-center">
+                    <div class="w-40 h-40 md:w-56 md:h-56 rounded-t-full rounded-b-xl overflow-hidden shadow-lg mb-4 border-4 border-white bg-white">
+                        <img src="assets/img/yog.JPG" loading="lazy" class="w-full h-full object-cover object-top">
+                    </div>
+                    <h2 class="font-aesthetic text-3xl md:text-4xl font-bold text-sky-900 mb-1">Yoga Dimas Saputra</h2>
+                    <p class="text-[10px] md:text-sm text-slate-500 font-medium">Putra dari<br>Bapak Adi Saputra & Ibu Tatik Indayani</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-40 h-40 md:w-56 md:h-56 rounded-t-full rounded-b-xl overflow-hidden shadow-lg mb-4 border-4 border-white bg-white">
+                        <img src="assets/img/naf.JPG" loading="lazy" class="w-full h-full object-cover object-top">
+                    </div>
+                    <h2 class="font-aesthetic text-3xl md:text-4xl font-bold text-sky-900 mb-1">Nafisatul Munawwaroh</h2>
+                    <p class="text-[10px] md:text-sm text-slate-500 font-medium">Putri dari<br>Bapak Bambang Suprijadi & Ibu Aliyah</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-2xl w-full reveal">
+            <div class="paper-panel p-6 md:p-10 rounded-[2rem] text-center border-t-8 border-t-sky-300">
+                <h2 class="font-aesthetic text-4xl md:text-5xl text-sky-800 mb-8">Save The Date</h2>
+                
+                <div class="flex justify-center gap-2 md:gap-4 mb-8">
+                    <div class="bg-sky-50 rounded-xl p-2 md:p-3 w-16 md:w-20 shadow-sm border border-sky-100">
+                        <span id="hari" class="block text-xl md:text-3xl font-bold text-sky-700">00</span>
+                        <span class="text-[9px] md:text-xs font-bold text-slate-500">Hari</span>
+                    </div>
+                    <div class="bg-sky-50 rounded-xl p-2 md:p-3 w-16 md:w-20 shadow-sm border border-sky-100">
+                        <span id="jam" class="block text-xl md:text-3xl font-bold text-sky-700">00</span>
+                        <span class="text-[9px] md:text-xs font-bold text-slate-500">Jam</span>
+                    </div>
+                    <div class="bg-sky-50 rounded-xl p-2 md:p-3 w-16 md:w-20 shadow-sm border border-sky-100">
+                        <span id="menit" class="block text-xl md:text-3xl font-bold text-sky-700">00</span>
+                        <span class="text-[9px] md:text-xs font-bold text-slate-500">Menit</span>
+                    </div>
+                    <div class="bg-sky-50 rounded-xl p-2 md:p-3 w-16 md:w-20 shadow-sm border border-sky-100">
+                        <span id="detik" class="block text-xl md:text-3xl font-bold text-sky-700">00</span>
+                        <span class="text-[9px] md:text-xs font-bold text-slate-500">Detik</span>
+                    </div>
+                </div>
+
+                <div class="space-y-6 md:space-y-8">
+                    <div class="border-b border-sky-100 pb-6">
+                        <h3 class="text-xl md:text-2xl font-bold text-sky-900 mb-1">Akad Nikah</h3>
+                        <p class="font-semibold text-sky-600 text-sm mb-1">Selasa, 26 Mei 2026</p>
+                        <p class="text-slate-500 text-xs mb-2">09.00 WIB - Selesai</p>
+                        <p class="text-[11px] md:text-sm text-slate-600">Musholah Bustanul Ulum <br> Jl. Imam Bonjol Gg.1, Sisir, Kota Batu</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-sky-900 mb-1">Resepsi</h3>
+                        <p class="font-semibold text-sky-600 text-sm mb-1">Minggu, 31 Mei 2026</p>
+                        <p class="text-slate-500 text-xs mb-2">10.00 WIB - Selesai</p>
+                        <p class="text-[11px] md:text-sm text-slate-600 mb-4">Rumah Mempelai Pria <br> Jl. Aji Mustofa No.4, Torongrejo, Junrejo, Kota Batu</p>
+                        
+                        <a href="https://maps.app.goo.gl/Q1zKZwU3TamPqx5W8" target="_blank" class="inline-block bg-sky-600 text-white px-6 py-2.5 rounded-full text-xs hover:bg-sky-700 transition shadow-md font-semibold"><i class="fa-solid fa-map-location-dot mr-2"></i>Lihat Peta Lokasi</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl w-full grid md:grid-cols-2 gap-6 reveal">
+            <div class="paper-panel rounded-3xl overflow-hidden shadow-md">
+                <div class="bg-sky-100 p-4 text-center"><h2 class="font-bold text-sky-800"><i class="fa-solid fa-calendar-check mr-2"></i> Kehadiran</h2></div>
+                <form id="rsvp-form" class="p-5 md:p-6 space-y-4">
+                    <div>
+                        <input type="text" id="rsvp-name" placeholder="Nama Lengkap" required class="w-full px-4 py-3 bg-white border border-sky-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-sky-300">
+                    </div>
+                    <div>
+                        <select id="rsvp-attendance" class="w-full px-4 py-3 bg-white border border-sky-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-sky-300">
+                            <option value="Hadir">Akan Hadir</option>
+                            <option value="Tidak Hadir">Maaf, Tidak Bisa Hadir</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="number" id="rsvp-person" min="1" max="3" value="1" placeholder="Jumlah Orang" class="w-full px-4 py-3 bg-white border border-sky-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-sky-300">
+                    </div>
+                    <button type="submit" class="w-full bg-sky-800 text-white font-bold py-3 rounded-xl hover:bg-sky-900 transition shadow-md text-sm"><i class="fa-brands fa-whatsapp mr-2"></i> Konfirmasi via WA</button>
+                </form>
+            </div>
+            
+            <div class="paper-panel rounded-3xl overflow-hidden shadow-md">
+                <div class="bg-sky-100 p-4 text-center"><h2 class="font-bold text-sky-800"><i class="fa-solid fa-envelope-open-text mr-2"></i> Ucapan & Doa</h2></div>
+                <div class="p-5 md:p-6">
+                    <form id="wishes-form" class="mb-4 space-y-3">
+                        <input type="text" id="wish-name" required placeholder="Nama Anda" class="w-full px-4 py-3 bg-white border border-sky-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-sky-300">
+                        <textarea id="wish-message" rows="2" required placeholder="Tulis doa untuk pengantin..." class="w-full px-4 py-3 bg-white border border-sky-100 rounded-xl text-sm outline-none resize-none focus:ring-2 focus:ring-sky-300"></textarea>
+                        <button type="submit" class="w-full bg-sky-600 text-white font-bold py-3 rounded-xl hover:bg-sky-700 transition shadow-md text-sm">Kirim Ucapan</button>
+                    </form>
+                    <div id="wishes-container" class="wishes-container h-48 overflow-y-auto pr-2 space-y-3 border-t border-slate-100 pt-4">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-2xl w-full text-center reveal">
+            <div class="paper-panel p-6 md:p-10 rounded-[2rem] shadow-md border-b-8 border-b-sky-300">
+                <i class="fa-solid fa-gift text-3xl text-sky-400 mb-4"></i>
+                <h2 class="font-aesthetic text-4xl text-sky-800 mb-3">Wedding Gift</h2>
+                <p class="text-slate-600 text-[11px] md:text-sm mb-6 font-medium">Tanpa mengurangi rasa hormat, bagi Anda yang ingin memberikan tanda kasih untuk kami, dapat melalui:</p>
+                
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-2xl border border-sky-50 shadow-sm">
+                        <p class="font-bold text-sky-900 tracking-wider text-lg" id="rek-bca">0190878902</p>
+                        <p class="text-xs text-slate-500 mb-3">BCA a.n. Yoga Dimas S</p>
+                        <button onclick="salinRekening('rek-bca')" class="bg-sky-50 text-sky-700 px-4 py-2 rounded-lg text-xs font-bold hover:bg-sky-100 w-full"><i class="fa-regular fa-copy mr-1"></i> Salin</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-sky-50 shadow-sm">
+                        <p class="font-bold text-sky-900 tracking-wider text-lg" id="rek-bni">1527763058</p>
+                        <p class="text-xs text-slate-500 mb-3">BNI a.n. Nafisatul M</p>
+                        <button onclick="salinRekening('rek-bni')" class="bg-sky-50 text-sky-700 px-4 py-2 rounded-lg text-xs font-bold hover:bg-sky-100 w-full"><i class="fa-regular fa-copy mr-1"></i> Salin</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center pt-10 reveal w-full">
+            <h2 class="font-aesthetic text-5xl text-sky-800 mb-4">Yoga & Nafisa</h2>
+            <p class="text-[10px] text-slate-500 font-medium">Created with <i class="fa-solid fa-heart text-sky-400"></i> from Nafisa to Yoga</p>
+        </footer>
+
+    </main>
+
+    <button id="music-btn" onclick="toggleMusic()" class="fixed bottom-6 right-6 z-40 bg-white text-sky-600 border border-sky-200 w-12 h-12 rounded-full shadow-xl flex justify-center items-center hidden transition-transform hover:scale-110">
+        <i class="fa-solid fa-music animate-spin text-lg" id="music-icon"></i>
+    </button>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+    <script>
+        // INISIALISASI
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestName = urlParams.get('to');
+            if (guestName) {
+                const decoded = decodeURIComponent(guestName);
+                document.getElementById('guest-name').innerText = decoded;
+                document.getElementById('rsvp-name').value = decoded; 
+                document.getElementById('wish-name').value = decoded; 
+            }
+        });
+
+        // BUKA UNDANGAN
+        const music = document.getElementById("bg-music");
+        let isPlaying = false;
+        function bukaUndangan() {
+            document.getElementById("cover-page").classList.add("hide-cover");
+            document.body.classList.remove("no-scroll");
+            document.getElementById("music-btn").classList.remove("hidden");
+            music.play().catch(e => console.log("Play tertunda"));
+            isPlaying = true;
+        }
+
+        // MUSIK
+        function toggleMusic() {
+            const icon = document.getElementById("music-icon");
+            if (isPlaying) {
+                music.pause();
+                icon.classList.replace("fa-music", "fa-pause");
+                icon.classList.remove("animate-spin");
+            } else {
+                music.play();
+                icon.classList.replace("fa-pause", "fa-music");
+                icon.classList.add("animate-spin");
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // COUNTDOWN
+        const countDownDate = new Date("May 31, 2026 10:00:00").getTime();
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now; 
+            if (distance < 0) { clearInterval(timer); return; }
+            document.getElementById("hari").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("jam").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("menit").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("detik").innerHTML = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+
+        // RSVP WA
+        document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            const nama = document.getElementById('rsvp-name').value;
+            const kehadiran = document.getElementById('rsvp-attendance').value;
+            let jumlah = document.getElementById('rsvp-person').value;
+            if (jumlah > 3) jumlah = 3;
+
+            const pesanWA = `Assalamu'alaikum,\n\n Saya *${nama}*.\nSesuai dengan undangan yang diberikan, InsyaAllah saya *${kehadiran}* pada acara pernikahan kalian dengan jumlah *${jumlah} orang*.\n\nSelamat mempersiapkan hari bahagia!`;
+            window.open(`https://wa.me/6283834447605?text=${encodeURIComponent(pesanWA)}`, '_blank');
+        });
+
+        // SALIN REKENING
+        function salinRekening(idElement) {
+            const norek = document.getElementById(idElement).innerText;
+            navigator.clipboard.writeText(norek).then(() => alert("Tersalin: " + norek));
+        }
+
+        // FIREBASE WISHES
+        const firebaseConfig = {
+            apiKey: "AIzaSyDK9X5aNNbYRdoBV0O_UInbhUuQPJ9Dk1k",
+            authDomain: "invitation-d67bd.firebaseapp.com",
+            databaseURL: "https://invitation-d67bd-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "invitation-d67bd",
+            storageBucket: "invitation-d67bd.firebasestorage.app",
+            messagingSenderId: "917772701028",
+            appId: "1:917772701028:web:a62a58a55755349ebcfe71"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const wishesRef = database.ref('wishes');
+        const wishesContainer = document.getElementById('wishes-container');
+
+        document.getElementById('wishes-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const oriText = btn.innerHTML;
+            const nama = document.getElementById('wish-name').value;
+            const pesan = document.getElementById('wish-message').value;
+
+            btn.innerHTML = 'Mengirim...'; btn.disabled = true;
+            const newRef = wishesRef.push();
+            newRef.set({ id: newRef.key, nama: nama, pesan: pesan, timestamp: Date.now() }).then(() => {
+                localStorage.setItem('my_wish_id', newRef.key);
+                fetch('https://formspree.io/f/mlganvbj', { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify({ Nama: nama, Ucapan: pesan }) });
+                this.reset();
+            }).finally(() => { btn.innerHTML = oriText; btn.disabled = false; });
+        });
+
+        wishesRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            wishesContainer.innerHTML = '';
+            const myWishId = localStorage.getItem('my_wish_id');
+            if (data) {
+                Object.values(data).sort((a, b) => b.timestamp - a.timestamp).forEach(wish => {
+                    const isMyWish = wish.id === myWishId;
+                    wishesContainer.innerHTML += `
+                    <div class="bg-sky-50 p-3 rounded-xl border border-sky-100 relative group">
+                        <h4 class="font-bold text-xs text-sky-800">${wish.nama}</h4>
+                        <p id="text-${wish.id}" class="text-[11px] text-slate-600 mt-1">${wish.pesan}</p>
+                        ${isMyWish ? `<button onclick="editWish('${wish.id}')" class="absolute top-2 right-2 text-sky-500 text-[10px]"><i class="fa-solid fa-pen"></i></button>` : ''}
+                    </div>`;
+                });
+            }
+        });
+
+        window.editWish = function(id) {
+            const newText = prompt("Ubah ucapan:", document.getElementById(`text-${id}`).innerText);
+            if (newText && newText.trim() !== "") database.ref('wishes/' + id).update({ pesan: newText });
+        }
+
+        // SCROLL REVEAL
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                if (reveals[i].getBoundingClientRect().top < window.innerHeight - 50) { 
+                    reveals[i].classList.add("active"); 
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal, {passive: true}); reveal();
+    </script>
+</body>
+</html>
